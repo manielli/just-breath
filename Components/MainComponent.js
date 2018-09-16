@@ -24,12 +24,12 @@ export default class MainComponent extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 20,
+    padding: 40,
     backgroundColor: '#febfe8',
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
-    fontSize: 20,
+    fontSize: 40,
   }
 });
