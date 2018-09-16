@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import StartStopPauseButton from './StartStopPause';
 
 export default class MainComponent extends React.Component {
 
@@ -16,6 +17,7 @@ export default class MainComponent extends React.Component {
         <Text style={styles.text}>
           WELCOME TO JUST BREATH..NOW TAKE A DEEP BREATH
         </Text>
+        <StartStopPauseButton />
       </View>
     );
   }
