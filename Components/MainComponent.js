@@ -15,7 +15,7 @@ export default class MainComponent extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          WELCOME TO JUST BREATH..NOW TAKE A DEEP BREATH
+          BREATH CIRCLE GOES HERE
         </Text>
         <StartStopPauseButton />
       </View>
