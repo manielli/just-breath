@@ -2,10 +2,13 @@ import React from 'react';
 import { Alert, Button, StyleSheet, View } from 'react-native';
 
 export default class StartStopPauseButton extends React.Component {
-  _onStartPressButton() {
+  _onStartPressButton = () => {
+    console.log("inside _onStartPressButton")
+    this.props.actionFunction("start")
     Alert.alert('Started!')
   }
   _onStopPressButton() {
+    this.props.actionFunction("stop")
     Alert.alert('Stopped!')
   }
   render() {

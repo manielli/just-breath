@@ -6,9 +6,23 @@ export default class MainComponent extends React.Component {
 
   state = {
     duration: 5,
-    started: false,
     stopped: true,
+    started: false,
     paused: false
+  };
+
+  actionHandler = (startstoppause) => {
+    console.log("inside actionHandler in MainComponent", startstoppause)
+    if(startstoppause === "start") {
+      this.setState({ started: true, stopped: false, paused: false }, ()=>{console.log("inside actionHandler in MainComponent", this.state)}
+      )
+    } else if(startstoppause == "stop") {
+      this.setState( (prevState) => ({ started: false, stopped: true, paused: false })
+      )
+    } else if(startstoppause == "pause") {
+      this.setState( (prevState) => ({ started: false, stopped: false, paused: true })
+      )
+    }
   };
 
   render() {
@@ -17,7 +31,7 @@ export default class MainComponent extends React.Component {
         <Text style={styles.text}>
           BREATH CIRCLE GOES HERE
         </Text>
-        <StartStopPauseButton />
+        <StartStopPauseButton actionFunction={this.actionHandler}/>
       </View>
     );
   }

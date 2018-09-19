@@ -14,7 +14,7 @@ export default class WelcomeScreen extends React.Component {
         </Text>
         <Button
           title="Push to start breathing"
-          onPress={ () => this.props.navigation.navigate('Main')}
+          onPress={ () => this.props.navigation.navigate('Main') }
         />
       </View>
     );
