@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default class BreathTimer extends React.Component {
   state = {
     time: this.props.duration,
-    incdec: -1,
+    incdec: -1, // <== this the increment/decrement variable we pass to tick() function and flip in flipped()
   };
 
   componentDidMount() {
