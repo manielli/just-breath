@@ -19,10 +19,10 @@ export default class BreathTimer extends React.Component {
     if(this.state.time < 1 || this.state.time > this.props.duration) {
       this.setState(
         { incdec: this.state.incdec * -1 }
-      )
-      console.log("inside flipped", this.state.incdec);
+      );
+      // console.log("inside flipped", this.state.incdec);
     }
-  }
+  };
 
   tick() {
     if(this.props.started === true) {
@@ -30,29 +30,27 @@ export default class BreathTimer extends React.Component {
       this.setState(
         { time: (this.state.time + this.state.incdec) }
       );
-      console.log("inside tick", this.state.incdec)
+      // console.log("inside tick", this.state.incdec)
     }
     else if(this.props.stopped === true) {
       this.setState(
         { time: this.props.duration }
       );
     }
-  }
-
-  countUpDown = () => {
-    if(this.state.time < 0) {
-      setInterval(this.setState({ time: this.state.time + 1 }), 1000)
-    } else if(this.state.time > this.props.duration) {
-      setInterval(this.setState({ time: this.state.time - 1 }), 1000)
-    }
   };
 
   render() {
     return (
       <View>
+
         <Text style={styles.timertext}>
           00:0{this.state.time}
         </Text>
+
+        <Text style={styles.text}>
+          BREATH CIRCLE GOES HERE
+        </Text>
+
       </View>
     );
   };
@@ -60,6 +58,9 @@ export default class BreathTimer extends React.Component {
 
 const styles = StyleSheet.create({
   timertext: {
+    fontSize: 40,
+  },
+  text: {
     fontSize: 40,
   },
 });
