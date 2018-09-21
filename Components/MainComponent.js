@@ -36,7 +36,7 @@ export default class MainComponent extends React.Component {
   durationUpdater = (newduration) => {
     this.setState(
       { duration: newduration },
-      ()=>console.log("inside durationUpdater", this.state.duration)
+      // ()=>console.log("inside durationUpdater", this.state.duration)
     )
   }
 

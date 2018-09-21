@@ -1,11 +1,7 @@
 import React from 'react';
-import { Alert, Slider, TouchableHighlight, StyleSheet, Text, View } from 'react-native';
+import { Alert, Slider, StyleSheet, Text, View } from 'react-native';
 
 export default class DurationSetter extends React.Component {
-
-  _onPressButton() {
-    Alert.alert('You tapped the button!')
-  }
 
   _onSliderChange(value) {
     this.props.durationUpdater(value)
@@ -13,37 +9,32 @@ export default class DurationSetter extends React.Component {
  }
 
   render() {
-    return (
-      <View>
-        <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Duration Setter</Text>
-          </View>
-        </TouchableHighlight>
-        <Slider
-          step={2} // <== Step value of the slider
-          maximumValue={8}
-          minimumValue={3}
-          onValueChange={this._onSliderChange.bind(this)} // <== Callback continuously called while the user is dragging the slider
-          value={this.props.duration} // <== INITIAL VALUE of slider
-
-        />
-      </View>
-    )
+    if(this.props.started === true ) {
+      return null
+    }
+    else {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.durationText}>Set Rate of Breath:</Text>
+          <Slider
+            step={2} // <== Step value of the slider
+            maximumValue={8}
+            minimumValue={3}
+            onValueChange={this._onSliderChange.bind(this)} // <== Callback continuously called while the user is dragging the slider
+            value={this.props.duration} // <== INITIAL VALUE of slider
+          />
+        </View>
+      )
+    }
   }
 }
 
 
 const styles = StyleSheet.create({
-  button: {
-    marginBottom: 30,
-    width: 200,
-    alignItems: 'center',
-    backgroundColor: '#b7ceff'
+  container: {
+    width: 300,
   },
-  buttonText: {
-    padding: 20,
-    color: 'white',
+  durationText: {
     fontSize: 20,
-  }
+  },
 });
