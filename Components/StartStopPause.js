@@ -5,7 +5,7 @@ export default class StartStopPauseButton extends React.Component {
 
   _onStartPressButton = () => {
     this.props.actionFunction("start")
-    Alert.alert('Started!')
+    Alert.alert('Deep Breaths!')
   }
 
   _onPausePressButton = () => {
