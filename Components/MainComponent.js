@@ -61,21 +61,6 @@ export default class MainComponent extends React.Component {
           sendIncDec={this.storeIncDec}
         />
 
-        <StartStopPauseButton
-          actionFunction={this.actionHandler}
-          started={this.state.started}
-          stopped={this.state.stopped}
-          paused={this.state.paused}
-        />
-
-        <DurationSetter
-          durationUpdater={this.durationUpdater}
-          duration={this.state.duration}
-          started={this.state.started}
-          stopped={this.state.stopped}
-          paused={this.state.paused}
-        />
-
         <BreathCircle
           style={{
             width: 250,
@@ -96,6 +81,21 @@ export default class MainComponent extends React.Component {
           </Text>
 
         </BreathCircle>
+
+        <StartStopPauseButton
+          actionFunction={this.actionHandler}
+          started={this.state.started}
+          stopped={this.state.stopped}
+          paused={this.state.paused}
+        />
+
+        <DurationSetter
+          durationUpdater={this.durationUpdater}
+          duration={this.state.duration}
+          started={this.state.started}
+          stopped={this.state.stopped}
+          paused={this.state.paused}
+        />
 
       </View>
     );
