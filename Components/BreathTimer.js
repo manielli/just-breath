@@ -48,19 +48,17 @@ export default class BreathTimer extends React.Component {
           00:0{this.state.time}
         </Text>
 
-        {/* <Text style={styles.text}>
-          BREATH CIRCLE GOES HERE
-        </Text> */}
-
         <BreathCircle
-          // style={{
-          //   width: 250,
-          //   height: 200,
-          //   backgroundColor: '#d0f2ff',
-          // }}
+          style={{
+            width: 250,
+            height: 200,
+            // backgroundColor: '#ffa6a6',
+          }}
           animationTime={this.state.time}
-          inOut={this.state.incdec}>
-
+          duration={this.props.duration}
+          incDec={this.state.incdec}
+          started={this.props.started}
+        >
           <Text
             style={{
               fontSize: 40,
