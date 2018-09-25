@@ -1,5 +1,5 @@
 import React from 'react';
-import BreathCircle from './BreathCircle';
+// import BreathCircle from './BreathCircle';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class BreathTimer extends React.Component {
@@ -21,6 +21,7 @@ export default class BreathTimer extends React.Component {
       this.setState(
         { incdec: this.state.incdec * -1 }
       );
+      this.props.sendIncDec(this.state.incdec)
       // console.log("inside flipped", this.state.incdec);
     }
   };
@@ -48,7 +49,7 @@ export default class BreathTimer extends React.Component {
           00:0{this.state.time}
         </Text>
 
-        <BreathCircle
+        {/* <BreathCircle
           style={{
             width: 250,
             height: 200,
@@ -68,7 +69,7 @@ export default class BreathTimer extends React.Component {
             BREATHE OUT
           </Text>
 
-        </BreathCircle>
+        </BreathCircle> */}
 
       </View>
     );
