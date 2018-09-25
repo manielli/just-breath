@@ -45,31 +45,9 @@ export default class BreathTimer extends React.Component {
     return (
       <View>
 
-        <Text style={styles.timertext}>
+        <Text style={styles.timerText}>
           00:0{this.state.time}
         </Text>
-
-        {/* <BreathCircle
-          style={{
-            width: 250,
-            height: 200,
-            // backgroundColor: '#ffa6a6',
-          }}
-          animationTime={this.state.time}
-          duration={this.props.duration}
-          incDec={this.state.incdec}
-          started={this.props.started}
-        >
-          <Text
-            style={{
-              fontSize: 40,
-              textAlign: 'center',
-              margin: 10,
-            }}>
-            BREATHE OUT
-          </Text>
-
-        </BreathCircle> */}
 
       </View>
     );
@@ -77,7 +55,7 @@ export default class BreathTimer extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  timertext: {
+  timerText: {
     fontSize: 40,
   },
   // text: {
