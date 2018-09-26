@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Text, View, Button } from 'react-native';
+import { Animated, Text, View } from 'react-native';
 
 export default class BreathCircle extends React.Component {
 
@@ -16,18 +16,36 @@ export default class BreathCircle extends React.Component {
         }
       ).start();
       return (
-        <Animated.View                 // Special animatable View
-        style={{
-          ...this.props.style,
-          // width: 250,
-          // height: 200,
-          backgroundColor: colorChangeAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['#ffa6a6', '#b7ceff'],
-          }),
-        }}
+        <Animated.View    // Special animatable View
+          style={{
+            // ...this.props.style,
+            width: colorChangeAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [250, 200],
+            }),
+            height: colorChangeAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [250, 200],
+            }),
+            backgroundColor: colorChangeAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: ['#b7ceff', '#ffa6a6'],
+            }),
+            borderRadius: colorChangeAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [250/2, 200/2]
+            }),
+          }}
         >
-          {this.props.children}
+          {/* {this.props.children} */}
+          <Text
+            style={{
+              fontSize: 20,
+              textAlign: 'center',
+              margin: 10,
+            }}>
+            BREATHE OUT
+          </Text>
         </Animated.View>
       );
     }
@@ -40,16 +58,36 @@ export default class BreathCircle extends React.Component {
         }
       ).start();    // Starts the animation
       return (
-        <Animated.View    // Special animatable View
-          style={{
-            ...this.props.style, // style props passed in from MainComponent
-            backgroundColor: colorChangeAnimation.interpolate({
-              inputRange: [0, 1],
-              outputRange: ['#b7ceff', '#ffa6a6'],
-            }),
-          }}
+        <Animated.View                 // Special animatable View
+        style={{
+          // ...this.props.style,
+          width: colorChangeAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [200, 250],
+          }),
+          height: colorChangeAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [200, 250],
+          }),
+          backgroundColor: colorChangeAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['#ffa6a6', '#b7ceff'],
+          }),
+          borderRadius: colorChangeAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [200/2, 250/2]
+          }),
+        }}
         >
-          {this.props.children}
+          {/* {this.props.children} */}
+          <Text
+            style={{
+              fontSize: 20,
+              textAlign: 'center',
+              margin: 10,
+            }}>
+            BREATHE IN
+          </Text>
         </Animated.View>
       );
     }

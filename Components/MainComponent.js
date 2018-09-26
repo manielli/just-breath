@@ -62,24 +62,15 @@ export default class MainComponent extends React.Component {
         />
 
         <BreathCircle
-          style={{
-            width: 250,
-            height: 200,
-            // backgroundColor: '#ffa6a6',
-          }}
+          // style={{
+          //   width: 250,
+          //   height: 200,
+          //   // backgroundColor: '#ffa6a6',
+          // }}
           duration={this.state.duration}
           incDec={this.state.incdec}
           started={this.state.started}
         >
-          <Text
-            style={{
-              fontSize: 40,
-              textAlign: 'center',
-              margin: 10,
-            }}>
-            BREATHE OUT
-          </Text>
-
         </BreathCircle>
 
         <StartStopPauseButton
