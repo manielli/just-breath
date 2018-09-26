@@ -21,11 +21,11 @@ export default class BreathCircle extends React.Component {
             // ...this.props.style,
             width: colorChangeAnimation.interpolate({
               inputRange: [0, 1],
-              outputRange: [250, 200],
+              outputRange: [300, 200],
             }),
             height: colorChangeAnimation.interpolate({
               inputRange: [0, 1],
-              outputRange: [250, 200],
+              outputRange: [300, 200],
             }),
             backgroundColor: colorChangeAnimation.interpolate({
               inputRange: [0, 1],
@@ -33,8 +33,9 @@ export default class BreathCircle extends React.Component {
             }),
             borderRadius: colorChangeAnimation.interpolate({
               inputRange: [0, 1],
-              outputRange: [250/2, 200/2]
+              outputRange: [300/2, 200/2]
             }),
+            justifyContent: 'center',
           }}
         >
           {/* {this.props.children} */}
@@ -44,7 +45,7 @@ export default class BreathCircle extends React.Component {
               textAlign: 'center',
               margin: 10,
             }}>
-            BREATHE OUT
+            breathe out
           </Text>
         </Animated.View>
       );
@@ -63,11 +64,11 @@ export default class BreathCircle extends React.Component {
           // ...this.props.style,
           width: colorChangeAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [200, 250],
+            outputRange: [200, 300],
           }),
           height: colorChangeAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [200, 250],
+            outputRange: [200, 300],
           }),
           backgroundColor: colorChangeAnimation.interpolate({
             inputRange: [0, 1],
@@ -75,8 +76,9 @@ export default class BreathCircle extends React.Component {
           }),
           borderRadius: colorChangeAnimation.interpolate({
             inputRange: [0, 1],
-            outputRange: [200/2, 250/2]
+            outputRange: [200/2, 300/2]
           }),
+          justifyContent: 'center',
         }}
         >
           {/* {this.props.children} */}
@@ -86,7 +88,7 @@ export default class BreathCircle extends React.Component {
               textAlign: 'center',
               margin: 10,
             }}>
-            BREATHE IN
+            breathe in
           </Text>
         </Animated.View>
       );
@@ -94,14 +96,24 @@ export default class BreathCircle extends React.Component {
     else {
       return (
         <View>
-          <Text
+          <View
             style={{
-              fontSize: 40,
-              textAlign: 'center',
-              margin: 10,
-            }}>
-            JUST BREATHE
-          </Text>
+              height: 300,
+              width: 300,
+              borderRadius: 300/2,
+              backgroundColor: '#b7ceff',
+              justifyContent: 'center',
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 30,
+                textAlign: 'center',
+                margin: 10,
+              }}>
+              just breathe
+            </Text>
+          </View>
         </View>
       )
     }

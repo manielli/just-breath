@@ -70,8 +70,7 @@ export default class MainComponent extends React.Component {
           duration={this.state.duration}
           incDec={this.state.incdec}
           started={this.state.started}
-        >
-        </BreathCircle>
+        />
 
         <StartStopPauseButton
           actionFunction={this.actionHandler}
