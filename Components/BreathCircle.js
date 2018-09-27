@@ -3,9 +3,22 @@ import { Animated, Easing, Text, View } from 'react-native';
 
 export default class BreathCircle extends React.Component {
 
+  // animate () {
+  //   let circleAnimation = new Animated.Value(0); // Sets variable to keyword
+  //   // this.circleAnimation.setValue(0)
+  //   Animated.timing(    // Animate over time
+  //     circleAnimation,   // The animated value to drive
+  //     {
+  //       toValue: 1,   // Animate to end value: 1
+  //       duration: this.props.duration * 1000,   // Make it take a while
+  //     }
+  //   ).start();
+  // };
+
   render() {
 
     let circleAnimation = new Animated.Value(0) // Sets variable to keyword
+    // let circleAnimation = this.circleAnimation // Sets variable to keyword
 
     if (this.props.started === true && this.props.incDec === -1) {
       Animated.timing(    // Animate over time
@@ -15,6 +28,8 @@ export default class BreathCircle extends React.Component {
           duration: this.props.duration * 1000,   // Make it take a while
         }
       ).start();
+      // console.log("animation breathe out started");
+      // this.animate();
       return (
         <Animated.View    // Special animatable View
           style={{
@@ -43,7 +58,7 @@ export default class BreathCircle extends React.Component {
             style={{
               fontSize: circleAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [25, 20],
+                outputRange: [32, 18],
               }),
               textAlign: 'center',
               margin: 10,
@@ -62,6 +77,7 @@ export default class BreathCircle extends React.Component {
           duration: this.props.duration * 1000,  // Make it equal to duration
         }
       ).start();    // Starts the animation
+      // this.animate()
       return (
         <Animated.View                 // Special animatable View
         style={{
@@ -86,14 +102,18 @@ export default class BreathCircle extends React.Component {
         }}
         >
           {/* {this.props.children} */}
-          <Text
+          <Animated.Text
             style={{
-              fontSize: 20,
+              fontSize: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [18, 32],
+              }),
               textAlign: 'center',
               margin: 10,
-            }}>
+            }}
+          >
             breathe in
-          </Text>
+          </Animated.Text>
         </Animated.View>
       );
     }
