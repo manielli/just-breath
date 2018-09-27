@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import StartStopPauseButton from './StartStopPause';
 import BreathTimer from './BreathTimer';
 import DurationSetter from './DurationSetter';
+import BreathCircle from './BreathCircle';
 
 export default class MainComponent extends React.Component {
 
@@ -10,7 +11,8 @@ export default class MainComponent extends React.Component {
     duration: 5,
     stopped: true,
     started: false,
-    paused: false
+    paused: false,
+    incdec: -1,
   };
 
   actionHandler = (startstoppause) => {
@@ -40,6 +42,13 @@ export default class MainComponent extends React.Component {
     )
   }
 
+  storeIncDec = (incdec) => {
+    this.setState(
+      { incdec: incdec },
+      // ()=>console.log("inside durationUpdater", this.state.duration)
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -49,6 +58,13 @@ export default class MainComponent extends React.Component {
           started={this.state.started}
           stopped={this.state.stopped}
           paused={this.state.paused}
+          sendIncDec={this.storeIncDec}
+        />
+
+        <BreathCircle
+          duration={this.state.duration}
+          incDec={this.state.incdec}
+          started={this.state.started}
         />
 
         <StartStopPauseButton

@@ -1,4 +1,5 @@
 import React from 'react';
+// import BreathCircle from './BreathCircle';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class BreathTimer extends React.Component {
@@ -20,6 +21,7 @@ export default class BreathTimer extends React.Component {
       this.setState(
         { incdec: this.state.incdec * -1 }
       );
+      this.props.sendIncDec(this.state.incdec)
       // console.log("inside flipped", this.state.incdec);
     }
   };
@@ -43,12 +45,8 @@ export default class BreathTimer extends React.Component {
     return (
       <View>
 
-        <Text style={styles.timertext}>
+        <Text style={styles.timerText}>
           00:0{this.state.time}
-        </Text>
-
-        <Text style={styles.text}>
-          BREATH CIRCLE GOES HERE
         </Text>
 
       </View>
@@ -57,10 +55,10 @@ export default class BreathTimer extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  timertext: {
+  timerText: {
     fontSize: 40,
   },
-  text: {
-    fontSize: 40,
-  },
+  // text: {
+  //   fontSize: 40,
+  // },
 });
