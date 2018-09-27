@@ -1,15 +1,15 @@
 import React from 'react';
-import { Animated, Text, View } from 'react-native';
+import { Animated, Easing, Text, View } from 'react-native';
 
 export default class BreathCircle extends React.Component {
 
   render() {
 
-    let colorChangeAnimation = new Animated.Value(0) // Sets variable to keyword
+    let circleAnimation = new Animated.Value(0) // Sets variable to keyword
 
     if (this.props.started === true && this.props.incDec === -1) {
       Animated.timing(    // Animate over time
-        colorChangeAnimation,   // The animated value to drive
+        circleAnimation,   // The animated value to drive
         {
           toValue: 1,   // Animate to end value: 1
           duration: this.props.duration * 1000,   // Make it take a while
@@ -19,19 +19,19 @@ export default class BreathCircle extends React.Component {
         <Animated.View    // Special animatable View
           style={{
             // ...this.props.style,
-            width: colorChangeAnimation.interpolate({
+            width: circleAnimation.interpolate({
               inputRange: [0, 1],
               outputRange: [300, 200],
             }),
-            height: colorChangeAnimation.interpolate({
+            height: circleAnimation.interpolate({
               inputRange: [0, 1],
               outputRange: [300, 200],
             }),
-            backgroundColor: colorChangeAnimation.interpolate({
+            backgroundColor: circleAnimation.interpolate({
               inputRange: [0, 1],
               outputRange: ['#b7ceff', '#ffa6a6'],
             }),
-            borderRadius: colorChangeAnimation.interpolate({
+            borderRadius: circleAnimation.interpolate({
               inputRange: [0, 1],
               outputRange: [300/2, 200/2]
             }),
@@ -39,20 +39,24 @@ export default class BreathCircle extends React.Component {
           }}
         >
           {/* {this.props.children} */}
-          <Text
+          <Animated.Text
             style={{
-              fontSize: 20,
+              fontSize: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [25, 20],
+              }),
               textAlign: 'center',
               margin: 10,
-            }}>
+            }}
+          >
             breathe out
-          </Text>
+          </Animated.Text>
         </Animated.View>
       );
     }
     else if (this.props.started === true && this.props.incDec === 1) {
       Animated.timing(      // Animate over time
-        colorChangeAnimation,   // The animated value to drive
+        circleAnimation,   // The animated value to drive
         {
           toValue: 1,     // Animate to end value: 1
           duration: this.props.duration * 1000,  // Make it equal to duration
@@ -62,19 +66,19 @@ export default class BreathCircle extends React.Component {
         <Animated.View                 // Special animatable View
         style={{
           // ...this.props.style,
-          width: colorChangeAnimation.interpolate({
+          width: circleAnimation.interpolate({
             inputRange: [0, 1],
             outputRange: [200, 300],
           }),
-          height: colorChangeAnimation.interpolate({
+          height: circleAnimation.interpolate({
             inputRange: [0, 1],
             outputRange: [200, 300],
           }),
-          backgroundColor: colorChangeAnimation.interpolate({
+          backgroundColor: circleAnimation.interpolate({
             inputRange: [0, 1],
             outputRange: ['#ffa6a6', '#b7ceff'],
           }),
-          borderRadius: colorChangeAnimation.interpolate({
+          borderRadius: circleAnimation.interpolate({
             inputRange: [0, 1],
             outputRange: [200/2, 300/2]
           }),
