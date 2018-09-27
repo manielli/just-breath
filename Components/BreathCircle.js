@@ -79,42 +79,67 @@ export default class BreathCircle extends React.Component {
       ).start();    // Starts the animation
       // this.animate()
       return (
-        <Animated.View                 // Special animatable View
-        style={{
-          // ...this.props.style,
-          width: circleAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [200, 300],
-          }),
-          height: circleAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [200, 300],
-          }),
-          backgroundColor: circleAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: ['#ffa6a6', '#b7ceff'],
-          }),
-          borderRadius: circleAnimation.interpolate({
-            inputRange: [0, 1],
-            outputRange: [200/2, 300/2]
-          }),
-          justifyContent: 'center',
-        }}
-        >
-          {/* {this.props.children} */}
-          <Animated.Text
+        <View style={{justifyContent: 'center',}}>
+          <Animated.View                 // Special animatable View
             style={{
-              fontSize: circleAnimation.interpolate({
+              // ...this.props.style,
+              width: circleAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [18, 32],
+                outputRange: [200, 300],
               }),
-              textAlign: 'center',
-              margin: 10,
+              height: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [200, 300],
+              }),
+              backgroundColor: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: ['#ffa6a6', '#b7ceff'],
+              }),
+              borderRadius: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [200/2, 300/2]
+              }),
+              justifyContent: 'center',
+              zIndex: 0,
             }}
           >
-            breathe in
-          </Animated.Text>
-        </Animated.View>
+            <Animated.View
+              style={{
+                width: circleAnimation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [200, 300],
+                }),
+                height: circleAnimation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [200, 300],
+                }),
+                borderRadius: circleAnimation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [200/2, 300/2]
+                }),
+                borderWidth: 5,
+                borderColor: '#d0f2ff',
+                zIndex: 1,
+                justifyContent: 'center',
+              }}
+            >
+              <Animated.Text
+                style={{
+                  fontSize: circleAnimation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [18, 32],
+                  }),
+                  textAlign: 'center',
+                  margin: 10,
+                  zIndex: 2,
+                }}
+                >
+                  breathe in
+              </Animated.Text>
+            </Animated.View>
+          </Animated.View>
+          {/* {this.props.children} */}
+        </View>
       );
     }
     else {
