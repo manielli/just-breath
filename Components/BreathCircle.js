@@ -31,6 +31,7 @@ export default class BreathCircle extends React.Component {
       // console.log("animation breathe out started");
       // this.animate();
       return (
+        <View style={{justifyContent: 'center',}}>
         <Animated.View    // Special animatable View
           style={{
             // ...this.props.style,
@@ -50,10 +51,33 @@ export default class BreathCircle extends React.Component {
               inputRange: [0, 1],
               outputRange: [300/2, 200/2]
             }),
+            flex: 0,
+            flexDirection: 'column',
             justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 0,
           }}
         >
-          {/* {this.props.children} */}
+          <Animated.View  // Border around Breath Circle
+            style={{
+              width: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [320, 220],
+              }),
+              height: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [320, 220],
+              }),
+              borderRadius: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [320/2, 220/2]
+              }),
+              borderWidth: 5,
+              borderColor: '#d0f2ff',
+              zIndex: 1,
+              justifyContent: 'center',
+            }}
+          >
           <Animated.Text
             style={{
               fontSize: circleAnimation.interpolate({
@@ -62,11 +86,14 @@ export default class BreathCircle extends React.Component {
               }),
               textAlign: 'center',
               margin: 10,
+              zIndex: 2,
             }}
           >
             breathe out
           </Animated.Text>
         </Animated.View>
+        </Animated.View>
+      </View>
       );
     }
     else if (this.props.started === true && this.props.incDec === 1) {
@@ -80,7 +107,7 @@ export default class BreathCircle extends React.Component {
       // this.animate()
       return (
         <View style={{justifyContent: 'center',}}>
-          <Animated.View                 // Special animatable View
+          <Animated.View                 // Breath Circle
             style={{
               // ...this.props.style,
               width: circleAnimation.interpolate({
@@ -99,23 +126,26 @@ export default class BreathCircle extends React.Component {
                 inputRange: [0, 1],
                 outputRange: [200/2, 300/2]
               }),
+              flex: 0,
+              flexDirection: 'column',
               justifyContent: 'center',
+              alignItems: 'center',
               zIndex: 0,
             }}
           >
-            <Animated.View
+            <Animated.View  // Border around Breath Circle
               style={{
                 width: circleAnimation.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [200, 300],
+                  outputRange: [220, 320],
                 }),
                 height: circleAnimation.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [200, 300],
+                  outputRange: [220, 320],
                 }),
                 borderRadius: circleAnimation.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [200/2, 300/2]
+                  outputRange: [220/2, 320/2]
                 }),
                 borderWidth: 5,
                 borderColor: '#d0f2ff',
@@ -123,7 +153,7 @@ export default class BreathCircle extends React.Component {
                 justifyContent: 'center',
               }}
             >
-              <Animated.Text
+              <Animated.Text // Text inside Breath Circle
                 style={{
                   fontSize: circleAnimation.interpolate({
                     inputRange: [0, 1],
@@ -138,7 +168,6 @@ export default class BreathCircle extends React.Component {
               </Animated.Text>
             </Animated.View>
           </Animated.View>
-          {/* {this.props.children} */}
         </View>
       );
     }
