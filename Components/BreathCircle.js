@@ -79,39 +79,39 @@ export default class BreathCircle extends React.Component {
               zIndex: 1,
             }}
           >
-            <Animated.View // outer ticks
+            <Animated.View // TOP OUTER TICK
               style={{
                 position: 'absolute',
                 left: circleAnimation.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [145, 95],
+                  outputRange: [150, 100],
                 }),
-                top: 0,
+                top: -5,
                 backgroundColor: 'white',
-                width: 20,
+                width: 10,
                 height: 10,
-                zIndex: 3,
-                transform: [
-                  {rotate: '90deg'}
-                ],
+                // zIndex: 3,
+                // transform: [
+                //   {rotate: '90deg'}
+                // ],
               }}
             >
             </Animated.View>
-            <Animated.View // outer ticks
+            <Animated.View // BOTTOM OUTER TICK
               style={{
                 position: 'absolute',
                 left: circleAnimation.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [145, 95],
+                  outputRange: [150, 100],
                 }),
-                bottom: 0,
+                bottom: -5,
                 backgroundColor: 'white',
-                width: 20,
+                width: 10,
                 height: 10,
-                zIndex: 3,
-                transform: [
-                  {rotate: '90deg'}
-                ],
+                // zIndex: 3,
+                // transform: [
+                //   {rotate: '90deg'}
+                // ],
               }}
             >
             </Animated.View>
@@ -191,42 +191,38 @@ export default class BreathCircle extends React.Component {
                 justifyContent: 'center',
               }}
             >
-              <Animated.View // outer ticks
+              <Animated.View // TOP OUTER TICK
                 style={{
                   position: 'absolute',
                   left: circleAnimation.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [95, 145],
+                    outputRange: [100, 150],
                   }),
-                  top: 0,
+                  top: -5,
                   backgroundColor: 'white',
-                  width: 20,
+                  width: 10,
                   height: 10,
-                  transform: [
-                    {rotate: '90deg'}
-                  ],
-                  zIndex: 3,
-                  // flexDirection: 'column',
-                  // justifyContent: 'center',
-                  // alignItems: 'center',
+                  // transform: [
+                  //   {rotate: '90deg'}
+                  // ],
                 }}
               >
               </Animated.View>
-              <Animated.View // outer ticks
+              <Animated.View // BOTTOM OUTER TICK
                 style={{
                   position: 'absolute',
                   left: circleAnimation.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [95, 145],
+                    outputRange: [100, 150],
                   }),
-                  bottom: 0,
+                  bottom: -5,
                   backgroundColor: 'white',
-                  width: 20,
+                  width: 10,
                   height: 10,
-                  zIndex: 3,
-                  transform: [
-                    {rotate: '90deg'}
-                  ],
+                  // zIndex: 3,
+                  // transform: [
+                  //   {rotate: '90deg'}
+                  // ],
                 }}
               >
               </Animated.View>
