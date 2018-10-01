@@ -45,7 +45,7 @@ export default class BreathCircle extends React.Component {
             }),
             backgroundColor: circleAnimation.interpolate({
               inputRange: [0, 1],
-              outputRange: ['#b7ceff', '#ffa6a6'],
+              outputRange: ['#9ecdf9', '#b3b8ff'],
             }),
             borderRadius: circleAnimation.interpolate({
               inputRange: [0, 1],
@@ -72,17 +72,36 @@ export default class BreathCircle extends React.Component {
                 inputRange: [0, 1],
                 outputRange: [320/2, 220/2]
               }),
+              // position: 'relative',
               borderWidth: 5,
               borderColor: '#d0f2ff',
-              zIndex: 1,
               justifyContent: 'center',
+              zIndex: 1,
             }}
           >
+            <Animated.View // outer ticks
+              style={{
+                position: 'absolute',
+                left: circleAnimation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [145, 95],
+                }),
+                top: 0,
+                backgroundColor: 'white',
+                width: 20,
+                height: 10,
+                zIndex: 3,
+                transform: [
+                  {rotate: '90deg'}
+                ],
+              }}
+            >
+            </Animated.View>
           <Animated.Text
             style={{
               fontSize: circleAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [32, 18],
+                outputRange: [36, 18],
               }),
               textAlign: 'center',
               margin: 10,
@@ -92,6 +111,7 @@ export default class BreathCircle extends React.Component {
             breathe out
           </Animated.Text>
         </Animated.View>
+
         </Animated.View>
       </View>
       );
@@ -120,7 +140,7 @@ export default class BreathCircle extends React.Component {
               }),
               backgroundColor: circleAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: ['#ffa6a6', '#b7ceff'],
+                outputRange: ['#b3b8ff', '#9ecdf9'],
               }),
               borderRadius: circleAnimation.interpolate({
                 inputRange: [0, 1],
@@ -153,11 +173,32 @@ export default class BreathCircle extends React.Component {
                 justifyContent: 'center',
               }}
             >
+              <Animated.View // outer ticks
+                style={{
+                  position: 'absolute',
+                  left: circleAnimation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [95, 145],
+                  }),
+                  top: 0,
+                  backgroundColor: 'white',
+                  width: 20,
+                  height: 10,
+                  transform: [
+                    {rotate: '90deg'}
+                  ],
+                  zIndex: 3,
+                  // flexDirection: 'column',
+                  // justifyContent: 'center',
+                  // alignItems: 'center',
+                }}
+              >
+              </Animated.View>
               <Animated.Text // Text inside Breath Circle
                 style={{
                   fontSize: circleAnimation.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [18, 32],
+                    outputRange: [18, 36],
                   }),
                   textAlign: 'center',
                   margin: 10,
@@ -167,6 +208,7 @@ export default class BreathCircle extends React.Component {
                   breathe in
               </Animated.Text>
             </Animated.View>
+
           </Animated.View>
         </View>
       );
