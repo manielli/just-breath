@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Easing, Text, View } from 'react-native';
+import { Animated, Text, View } from 'react-native';
 
 export default class BreathCircle extends React.Component {
 
@@ -87,6 +87,24 @@ export default class BreathCircle extends React.Component {
                   outputRange: [145, 95],
                 }),
                 top: 0,
+                backgroundColor: 'white',
+                width: 20,
+                height: 10,
+                zIndex: 3,
+                transform: [
+                  {rotate: '90deg'}
+                ],
+              }}
+            >
+            </Animated.View>
+            <Animated.View // outer ticks
+              style={{
+                position: 'absolute',
+                left: circleAnimation.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [145, 95],
+                }),
+                bottom: 0,
                 backgroundColor: 'white',
                 width: 20,
                 height: 10,
@@ -191,6 +209,24 @@ export default class BreathCircle extends React.Component {
                   // flexDirection: 'column',
                   // justifyContent: 'center',
                   // alignItems: 'center',
+                }}
+              >
+              </Animated.View>
+              <Animated.View // outer ticks
+                style={{
+                  position: 'absolute',
+                  left: circleAnimation.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [95, 145],
+                  }),
+                  bottom: 0,
+                  backgroundColor: 'white',
+                  width: 20,
+                  height: 10,
+                  zIndex: 3,
+                  transform: [
+                    {rotate: '90deg'}
+                  ],
                 }}
               >
               </Animated.View>
