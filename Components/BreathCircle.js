@@ -18,17 +18,25 @@ export default class BreathCircle extends React.Component {
   render() {
 
     let circleAnimation = new Animated.Value(0) // Sets variable to keyword
-    // let circleAnimation = this.circleAnimation // Sets variable to keyword
+    let snapshot = 150
+    let radius = 200/2
+    let inputRange = []
+    let outputRange = []
+    for (let i=0; i<=snapshot; ++i) {
+      let value = i/snapshot;
+      let move = Math.sin(value * Math.PI) * radius;
+      inputRange.push(value);
+      outputRange.push(move);
+    }
 
     if (this.props.started === true && this.props.incDec === -1) {
       Animated.timing(    // Animate over time
         circleAnimation,   // The animated value to drive
         {
           toValue: 1,   // Animate to end value: 1
-          duration: this.props.duration * 1000,   // Make it take a while
+          duration: this.props.duration * 1000,   // Duration of Animation
         }
       ).start();
-      // console.log("animation breathe out started");
       // this.animate();
       return (
         <View>
@@ -79,6 +87,31 @@ export default class BreathCircle extends React.Component {
                 zIndex: 1,
               }}
             >
+              <Animated.View
+                style={{
+                  position: 'absolute',
+                  backgroundColor: '#e785c8',
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  left: 150,
+                  top: -5,
+                  transform: [
+                    {
+                      translateY: circleAnimation.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, (-Math.cos(Math.PI) * 430/2)]
+                      })
+                    },
+                    {
+                      translateX: circleAnimation.interpolate({
+                        inputRange, outputRange
+                      })
+                    },
+                  ],
+                }}
+              >
+              </Animated.View>
               <Animated.View // TOP OUTER TICK
                 style={{
                   position: 'absolute',
