@@ -18,23 +18,29 @@ export default class BreathCircle extends React.Component {
   render() {
 
     let circleAnimation = new Animated.Value(0) // Sets variable to keyword
-    let snapshot = 50
+
+    let snapshot = 50 // must be the same as the diff in the two radii
     let radius = 160 //animated 160 => 110
+    let interpolatedRadius = []
     let xinputRange = []
     let xoutputRange = []
     let yinputRange = []
     let youtputRange = []
 
+    for (let j=160; j>=110; --j) {
+      interpolatedRadius.push(j);
+    }
+
     for (let i=0; i<=snapshot; ++i) {
       let value = i/snapshot;
-      let move = Math.sin(value * Math.PI) * radius;
+      let move = Math.sin(value * Math.PI) * interpolatedRadius[i];
       xinputRange.push(value);
       xoutputRange.push(move);
     }
 
     for (let i=0; i<=snapshot; ++i) {
       let value = i/snapshot;
-      let move = -Math.cos(value * Math.PI) * radius;
+      let move = -Math.cos(value * Math.PI) * interpolatedRadius[i];
       yinputRange.push(value);
       youtputRange.push(move);
     }
@@ -85,7 +91,10 @@ export default class BreathCircle extends React.Component {
               width: 10,
               height: 10,
               borderRadius: 5,
-              top: 5,
+              top: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [5, -5]
+              }),
               zIndex: 3,
               transform: [
                 {
