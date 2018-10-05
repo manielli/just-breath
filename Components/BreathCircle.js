@@ -20,32 +20,49 @@ export default class BreathCircle extends React.Component {
     let circleAnimation = new Animated.Value(0) // Sets variable to keyword
 
     let snapshot = 50 // must be the same as the diff in the two radii
-    let radius = 160 //animated 160 => 110
     let interpolatedRadius = []
-    let xinputRange = []
+    let interpolatedRadius2 = []
+    let inputRange = []
     let xoutputRange = []
-    let yinputRange = []
     let youtputRange = []
+    let xoutputRangeIn = []
+    let youtputRangeIn = []
 
+    // set interpolatedRadius to values between 160 and 110 for breath OUT
     for (let j=160; j>=110; --j) {
       interpolatedRadius.push(j);
     }
-
-    for (let i=0; i<=snapshot; ++i) {
-      let value = i/snapshot;
-      let move = Math.sin(value * Math.PI) * interpolatedRadius[i];
-      xinputRange.push(value);
-      xoutputRange.push(move);
+    // set interpolatedRadius2 to values between 110 and 160 for breath IN
+    for (let k=110; k<=160; ++k) {
+      interpolatedRadius2.push(k);
     }
 
+    // transformed X-values for Breath Out
+    for (let i=0; i<=snapshot; ++i) {
+      let value = i/snapshot; // ie 0/50 1/50, 2/50 => up to 1
+      let move = Math.sin(value * Math.PI) * interpolatedRadius[i];
+      inputRange.push(value);
+      xoutputRange.push(move);
+    }
+    // transformed Y-values for Breath Out
     for (let i=0; i<=snapshot; ++i) {
       let value = i/snapshot;
       let move = -Math.cos(value * Math.PI) * interpolatedRadius[i];
-      yinputRange.push(value);
       youtputRange.push(move);
     }
 
-
+    // transformed X-values for Breath IN
+    for (let i=0; i<=snapshot; ++i) {
+      let value = i/snapshot; // ie 0/50 1/50, 2/50 => up to 1
+      let move = -Math.sin(value * Math.PI) * interpolatedRadius2[i];
+      xoutputRangeIn.push(move);
+    }
+    // transformed Y-values for Breath IN
+    for (let i=0; i<=snapshot; ++i) {
+      let value = i/snapshot;
+      let move = Math.cos(value * Math.PI) * interpolatedRadius2[i];
+      youtputRangeIn.push(move);
+    }
 
     if (this.props.started === true && this.props.incDec === -1) {
       Animated.timing(    // Animate over time
@@ -60,7 +77,6 @@ export default class BreathCircle extends React.Component {
         <View>
           <Animated.View    // BREATH ORB
             style={{
-              // ...this.props.style,
               width: circleAnimation.interpolate({
                 inputRange: [0, 1],
                 outputRange: [300, 200],
@@ -99,13 +115,13 @@ export default class BreathCircle extends React.Component {
               transform: [
                 {
                   translateY: circleAnimation.interpolate({
-                    inputRange: yinputRange,
+                    inputRange: inputRange,
                     outputRange: youtputRange
                   })
                 },
                 {
                   translateX: circleAnimation.interpolate({
-                    inputRange: xinputRange,
+                    inputRange: inputRange,
                     outputRange: xoutputRange
                   })
                 },
@@ -229,8 +245,38 @@ export default class BreathCircle extends React.Component {
               zIndex: 0,
             }}
           >
+            <Animated.View // TRAVEL BALL
+            style={{
+              position: 'relative',
+              backgroundColor: '#e785c8',
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+              top: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [-5, 5]
+              }),
+              zIndex: 3,
+              transform: [
+                {
+                  translateY: circleAnimation.interpolate({
+                    inputRange: inputRange,
+                    outputRange: youtputRangeIn
+                  })
+                },
+                {
+                  translateX: circleAnimation.interpolate({
+                    inputRange: inputRange,
+                    outputRange: xoutputRangeIn
+                  })
+                },
+              ],
+            }}
+            >
+            </Animated.View>
             <Animated.View  // CIRCLE BORDER
               style={{
+                position: 'absolute',
                 width: circleAnimation.interpolate({
                   inputRange: [0, 1],
                   outputRange: [220, 320],
