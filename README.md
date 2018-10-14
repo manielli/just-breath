@@ -1,5 +1,7 @@
 ![](JustBreathe.gif)
 
-## An App For Calming the Breath
+# An App For Calming the Breath
 
-# JUST BREATHE
+## JUST BREATHE
+
+### Now take a deep breath...
