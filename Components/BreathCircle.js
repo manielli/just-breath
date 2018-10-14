@@ -42,7 +42,7 @@ export default class BreathCircle extends React.Component {
     let xoutputRangeIn = []
     let youtputRangeIn = []
 
-    // set BREATHE OUT interpolatedRadius to values between 160 and 110
+    // set BREATHE OUT interpolatedRadius to values between outercircleMaxRadius and outercircleMinRadius
     for (let j=outercircleMaxRadius; j>=outercircleMinRadius; --j) {
       interpolatedRadius.push(j);
     }
