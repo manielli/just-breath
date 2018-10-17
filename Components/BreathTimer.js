@@ -43,7 +43,7 @@ export default class BreathTimer extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.incdecTimer}>
 
         <Text style={styles.timerText}>
           00:0{this.state.time}
@@ -55,6 +55,10 @@ export default class BreathTimer extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  incdecTimer: {
+    position: 'absolute',
+    top: 0,
+  },
   timerText: {
     fontSize: 40,
   },

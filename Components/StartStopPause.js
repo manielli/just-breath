@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Button, StyleSheet, View } from 'react-native';
+import { Alert, Button, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 
 export default class StartStopPauseButton extends React.Component {
 
@@ -37,11 +37,14 @@ export default class StartStopPauseButton extends React.Component {
       return (
         <View style={styles.buttonContainer}>
           <View style={styles.startbuttonContainer}>
-            <Button
+            <TouchableOpacity
               onPress={this._onStartPressButton}
-              title="START"
-              color="#841584"
-            />
+              style={styles.touchable}
+            >
+              <Image
+                source={require("../Assets/play-button-white.png")}
+              />
+            </TouchableOpacity>
           </View>
         </View>
       );
@@ -51,9 +54,22 @@ export default class StartStopPauseButton extends React.Component {
 
 const styles = StyleSheet.create({
   buttonContainer: {
+    position: 'absolute',
+    bottom: 0,
     margin: 20,
   },
   startbuttonContainer: {
-    backgroundColor: '#feefb9',
-  }
+    flex: 0,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#d0f2ff',
+  },
+  touchable: {
+    left: 2,
+  },
 });
