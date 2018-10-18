@@ -8,9 +8,9 @@ export default class WelcomeScreen extends React.Component {
     title: 'Home',
   }
   render() {
-    // LOADING THE SOUND FOR THE BREATHE CIRCLE
+    // ASYNC LOADING THE SOUND FOR THE BREATHE CIRCLE
     breatheSound.loadAsync(
-      require("../Assets/breathe1.wav"),
+      require("../Assets/breathe_05secdur_30total.wav"),
       initialStatus = { shouldPlay: false, isLooping: true, },
       onPlaybackStatusUpdate = null,
       downloadFirst = false,
