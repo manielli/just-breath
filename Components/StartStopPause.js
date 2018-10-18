@@ -6,14 +6,15 @@ export default class StartStopPauseButton extends React.Component {
 
   _onStartPressButton = () => {
     this.props.actionFunction("start")
-    Expo.Audio.Sound.create(
-      require("../Assets/breathe1.wav"),
-      initialStatus = { shouldPlay: true },
-      onPlaybackStatusUpdate = null,
-      downloadFirst = true,
-      // { shouldPlay: true },
-      console.log("playing sound!")
-    )
+    // breatheSound()
+    // breatheSound.loadAsync(
+    //   require("../Assets/breathe1.wav"),
+    //   initialStatus = { shouldPlay: true, isLooping: true, },
+    //   onPlaybackStatusUpdate = null,
+    //   downloadFirst = true,
+    //   console.log("playing sound!"),
+    // )
+    breatheSound.playAsync()
     Alert.alert('Deep Breaths!')
   }
 
@@ -24,6 +25,7 @@ export default class StartStopPauseButton extends React.Component {
 
   _onStopPressButton = () => {
     this.props.actionFunction("stop")
+    breatheSound.stopAsync()
     Alert.alert('Stopped!')
   }
   render() {
