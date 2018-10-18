@@ -1,5 +1,6 @@
 import React from 'react';
 import { Alert, Button, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import breatheSound from './BreatheSound';
 
 export default class StartStopPauseButton extends React.Component {
@@ -7,14 +8,7 @@ export default class StartStopPauseButton extends React.Component {
   _onStartPressButton = () => {
     this.props.actionFunction("start")
     // breatheSound()
-    // breatheSound.loadAsync(
-    //   require("../Assets/breathe1.wav"),
-    //   initialStatus = { shouldPlay: true, isLooping: true, },
-    //   onPlaybackStatusUpdate = null,
-    //   downloadFirst = true,
-    //   console.log("playing sound!"),
-    // )
-    breatheSound.playAsync()
+    breatheSound.playAsync(console.log("playing sound!"))
     Alert.alert('Deep Breaths!')
   }
 
@@ -53,6 +47,11 @@ export default class StartStopPauseButton extends React.Component {
               onPress={this._onStartPressButton}
               style={styles.touchable}
             >
+              {/* <Ionicons
+                name="ios-arrow-forward"
+                size={40}
+                color="white"
+              /> */}
               <Image
                 source={require("../Assets/play-button-white.png")}
               />
