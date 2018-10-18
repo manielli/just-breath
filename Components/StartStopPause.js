@@ -1,10 +1,19 @@
 import React from 'react';
 import { Alert, Button, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+import breatheSound from './BreatheSound';
 
 export default class StartStopPauseButton extends React.Component {
 
   _onStartPressButton = () => {
     this.props.actionFunction("start")
+    Expo.Audio.Sound.create(
+      require("../Assets/breathe1.wav"),
+      initialStatus = { shouldPlay: true },
+      onPlaybackStatusUpdate = null,
+      downloadFirst = true,
+      // { shouldPlay: true },
+      console.log("playing sound!")
+    )
     Alert.alert('Deep Breaths!')
   }
 
@@ -33,6 +42,7 @@ export default class StartStopPauseButton extends React.Component {
         </View>
       )
     }
+    // https://stackoverflow.com/questions/45263904/how-to-define-image-as-a-background-button
     else if(this.props.stopped === true || this.props.paused === true) {
       return (
         <View style={styles.buttonContainer}>
