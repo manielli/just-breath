@@ -3,15 +3,37 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default class SessionTimer extends React.Component {
   state = {
-    time: "0:00",
-    isOn: false,
-    start: 0,
+    start: new Date(),
+    now: new Date(),
   }
+
+  componentDidMount() {
+    this.timer = setInterval( () => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  tick() {
+    if(this.props.started) {
+      // const now = new Date().getTime()
+      this.setState({
+        now: (new Date() - this.state.start)
+      })
+    }
+    // else if(this.props.stopped === true) {
+    //   clearInterval(this.timer)
+    //   console.log("stop")
+    // }
+  }
+
   render() {
+    let time = Math.floor(this.state.now) / 1000
     return (
       <View style={styles.sessionTimer}>
         <Text style={styles.timerText}>
-          0{this.state.time}
+          {time}
         </Text>
       </View>
     )
