@@ -1,5 +1,4 @@
 import React from 'react';
-// import BreathCircle from './BreathCircle';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class BreathTimer extends React.Component {
@@ -58,11 +57,10 @@ const styles = StyleSheet.create({
   incdecTimer: {
     position: 'absolute',
     top: 0,
+    left: 0,
+    margin: 20,
   },
   timerText: {
     fontSize: 40,
   },
-  // text: {
-  //   fontSize: 40,
-  // },
 });

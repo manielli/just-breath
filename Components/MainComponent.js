@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import StartStopPauseButton from './StartStopPause';
 import BreathTimer from './BreathTimer';
+import SessionTimer from './SessionTimer';
 import DurationSetter from './DurationSetter';
 import BreathCircle from './BreathCircle';
 
@@ -59,6 +60,12 @@ export default class MainComponent extends React.Component {
           stopped={this.state.stopped}
           paused={this.state.paused}
           sendIncDec={this.storeIncDec}
+        />
+
+        <SessionTimer
+          started={this.state.started}
+          stopped={this.state.stopped}
+          paused={this.state.paused}
         />
 
         <BreathCircle
