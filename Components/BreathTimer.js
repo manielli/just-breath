@@ -20,6 +20,7 @@ export default class BreathTimer extends React.Component {
       this.setState(
         { incdec: this.state.incdec * -1 }
       );
+      // pass the incdec state up to the MainComponent
       this.props.sendIncDec(this.state.incdec)
       // console.log("inside flipped", this.state.incdec);
     }
