@@ -13,7 +13,6 @@ export default class MainComponent extends React.Component {
     stopped: true,
     started: false,
     paused: false,
-    start: new Date(),
     incdec: -1,
   };
 
@@ -21,12 +20,12 @@ export default class MainComponent extends React.Component {
     // console.log("inside actionHandler in MainComponent", startstoppause)
     if(startstoppause === "start") {
       this.setState(
-        { started: true, stopped: false, paused: false, start: new Date(), },
-        ()=>{console.log("inside actionHandler START in MainComponent", this.state)}
+        { started: true, stopped: false, paused: false, },
+        // ()=>{console.log("inside actionHandler START in MainComponent", this.state)}
       )
     } else if(startstoppause === "stop") {
       this.setState(
-        { started: false, stopped: true, paused: false, start: new Date(), },
+        { started: false, stopped: true, paused: false, },
         // ()=>{console.log("inside actionHandler STOP in MainComponent", this.state)}
       )
     } else if(startstoppause === "pause") {
@@ -47,7 +46,7 @@ export default class MainComponent extends React.Component {
   storeIncDec = (incdec) => {
     this.setState(
       { incdec: incdec },
-      // ()=>console.log("inside durationUpdater", this.state.duration)
+      ()=>console.log("inside storeIncDec", this.state.incdec)
     )
   }
 
@@ -56,7 +55,7 @@ export default class MainComponent extends React.Component {
       <View style={styles.container}>
 
         <BreathTimer
-          duration={this.state.duration -1}
+          duration={this.state.duration - 1}
           started={this.state.started}
           stopped={this.state.stopped}
           paused={this.state.paused}
@@ -67,7 +66,7 @@ export default class MainComponent extends React.Component {
           started={this.state.started}
           stopped={this.state.stopped}
           paused={this.state.paused}
-          start={this.state.start}
+          incdec={this.state.incdec}
         />
 
         <BreathCircle
