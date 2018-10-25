@@ -14,13 +14,13 @@ export default class StartStopPauseButton extends React.Component {
 
   _onPausePressButton = () => {
     this.props.actionFunction("pause")
-    Alert.alert('Paused!')
+    // Alert.alert('Paused Breath')
   }
 
   _onStopPressButton = () => {
     this.props.actionFunction("stop")
     breatheSound.stopAsync()
-    Alert.alert('Stopped!')
+    // Alert.alert('Stopped!')
   }
   render() {
     if(this.props.started === true) {
