@@ -1,12 +1,21 @@
 import React from 'react';
 import { StyleSheet, Button, View, Text } from 'react-native';
 import { createStackNavigator, } from 'react-navigation';
+import breatheSound from './BreatheSound';
 
 export default class WelcomeScreen extends React.Component {
   static navigationOptions = {
     title: 'Home',
   }
   render() {
+    // ASYNC LOADING THE SOUND FOR THE BREATHE CIRCLE
+    breatheSound.loadAsync(
+      require("../Assets/breathe_05secdur_30total.wav"),
+      initialStatus = { shouldPlay: false, isLooping: true, },
+      onPlaybackStatusUpdate = null,
+      downloadFirst = false,
+      console.log("loading sound!"),
+    )
     return (
       <View style={styles.container}>
         <Text style={styles.text}>

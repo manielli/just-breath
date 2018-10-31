@@ -5,10 +5,11 @@ export default class DurationSetter extends React.Component {
 
   _onSliderChange(value) {
     this.props.durationUpdater(value)
-    Alert.alert(`Changed breath rate to ${value *2} seconds per breath, which is ${Math.floor(60/(value *2))} breaths/min`)
+    // Alert.alert(`Changed breath rate to ${Math.floor(60/(value *2))} breaths/min`)
  }
 
   render() {
+    let rate = Math.floor(60/(this.props.duration *2))
     if(this.props.started === true ) {
       return null
     }
@@ -16,6 +17,7 @@ export default class DurationSetter extends React.Component {
       return (
         <View style={styles.container}>
           <Text style={styles.durationText}>Set Rate of Breath:</Text>
+          <Text style={styles.rateText}> {rate} breaths/min</Text>
           <Slider
             step={2} // <== Step value of the slider
             maximumValue={8}
@@ -33,8 +35,12 @@ export default class DurationSetter extends React.Component {
 const styles = StyleSheet.create({
   container: {
     width: 300,
+    margin: 20,
   },
   durationText: {
     fontSize: 20,
+  },
+  rateText: {
+    fontSize: 12,
   },
 });

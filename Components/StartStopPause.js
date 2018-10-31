@@ -1,21 +1,26 @@
 import React from 'react';
-import { Alert, Button, StyleSheet, View } from 'react-native';
+import { Alert, Button, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import breatheSound from './BreatheSound';
 
 export default class StartStopPauseButton extends React.Component {
 
   _onStartPressButton = () => {
     this.props.actionFunction("start")
+    // breatheSound()
+    breatheSound.playAsync(console.log("playing sound!"))
     Alert.alert('Deep Breaths!')
   }
 
   _onPausePressButton = () => {
     this.props.actionFunction("pause")
-    Alert.alert('Paused!')
+    // Alert.alert('Paused Breath')
   }
 
   _onStopPressButton = () => {
     this.props.actionFunction("stop")
-    Alert.alert('Stopped!')
+    breatheSound.stopAsync()
+    // Alert.alert('Stopped!')
   }
   render() {
     if(this.props.started === true) {
@@ -33,15 +38,24 @@ export default class StartStopPauseButton extends React.Component {
         </View>
       )
     }
+    // https://stackoverflow.com/questions/45263904/how-to-define-image-as-a-background-button
     else if(this.props.stopped === true || this.props.paused === true) {
       return (
         <View style={styles.buttonContainer}>
           <View style={styles.startbuttonContainer}>
-            <Button
+            <TouchableOpacity
               onPress={this._onStartPressButton}
-              title="START"
-              color="#841584"
-            />
+              style={styles.touchable}
+            >
+              {/* <Ionicons
+                name="ios-arrow-forward"
+                size={40}
+                color="white"
+              /> */}
+              <Image
+                source={require("../Assets/play-button-white.png")}
+              />
+            </TouchableOpacity>
           </View>
         </View>
       );
@@ -51,9 +65,22 @@ export default class StartStopPauseButton extends React.Component {
 
 const styles = StyleSheet.create({
   buttonContainer: {
+    position: 'absolute',
+    bottom: 0,
     margin: 20,
   },
   startbuttonContainer: {
-    backgroundColor: '#feefb9',
-  }
+    flex: 0,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#d0f2ff',
+  },
+  touchable: {
+    left: 2,
+  },
 });

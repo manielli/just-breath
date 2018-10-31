@@ -30,8 +30,8 @@ export default class BreathCircle extends React.Component {
     let travelBallWidHi = 10
     let travelBallColor = '#e785c8'
     // TEXT SIZES
-    let fontSizeMax = 32
-    let fontSizeMin = 18
+    let fontSizeMax = 30
+    let fontSizeMin = 20
     // METHODS FOR ANIMATING THE TRAVELLING BALL ====>
     let snapshot = (outercircleMaxWidth - outercircleMinWidth)/2 // must be the same as the diff in the two radii
     let interpolatedRadius = []

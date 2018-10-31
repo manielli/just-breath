@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import StartStopPauseButton from './StartStopPause';
 import BreathTimer from './BreathTimer';
+import SessionTimer from './SessionTimer';
 import DurationSetter from './DurationSetter';
 import BreathCircle from './BreathCircle';
 
@@ -45,7 +46,7 @@ export default class MainComponent extends React.Component {
   storeIncDec = (incdec) => {
     this.setState(
       { incdec: incdec },
-      // ()=>console.log("inside durationUpdater", this.state.duration)
+      ()=>console.log("inside storeIncDec", this.state.incdec)
     )
   }
 
@@ -54,11 +55,18 @@ export default class MainComponent extends React.Component {
       <View style={styles.container}>
 
         <BreathTimer
-          duration={this.state.duration -1}
+          duration={this.state.duration - 1}
           started={this.state.started}
           stopped={this.state.stopped}
           paused={this.state.paused}
           sendIncDec={this.storeIncDec}
+        />
+
+        <SessionTimer
+          started={this.state.started}
+          stopped={this.state.stopped}
+          paused={this.state.paused}
+          incdec={this.state.incdec}
         />
 
         <BreathCircle
