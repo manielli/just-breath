@@ -5,6 +5,7 @@ import BreathTimer from './BreathTimer';
 import SessionTimer from './SessionTimer';
 import DurationSetter from './DurationSetter';
 import BreathCircle from './BreathCircle';
+import BreathSound from './BreathSound';
 
 export default class MainComponent extends React.Component {
 
@@ -48,6 +49,12 @@ export default class MainComponent extends React.Component {
       { incdec: incdec },
       ()=>console.log("inside storeIncDec", this.state.incdec)
     )
+    // if (incdec === 1) {
+    //   breathInSound.playAsync(console.log("playing sound!"))
+    // }
+    // if (incdec === -1) {
+    //   breathOutSound.playAsync(console.log("playing sound!"))
+    // }
   }
 
   render() {
@@ -86,6 +93,12 @@ export default class MainComponent extends React.Component {
           durationUpdater={this.durationUpdater}
           duration={this.state.duration}
           started={this.state.started}
+          stopped={this.state.stopped}
+          paused={this.state.paused}
+        />
+
+        <BreathSound
+          incdec={this.state.incdec}
           stopped={this.state.stopped}
           paused={this.state.paused}
         />
