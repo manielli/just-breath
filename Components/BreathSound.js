@@ -27,10 +27,10 @@ export default class BreathSound extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.incdec === 1) {
+    if(nextProps.incdec === 1 && nextProps.started === true) {
       this.state.inSound.replayAsync(console.log("playing IN sound!"))
     }
-    if(nextProps.incdec === -1) {
+    if(nextProps.incdec === -1 && nextProps.started === true) {
       this.state.outSound.replayAsync(console.log("playing OUT sound!"))
     }
     if(nextProps.stopped || nextProps.paused === true) {

@@ -49,12 +49,6 @@ export default class MainComponent extends React.Component {
       { incdec: incdec },
       ()=>console.log("inside storeIncDec", this.state.incdec)
     )
-    // if (incdec === 1) {
-    //   breathInSound.playAsync(console.log("playing sound!"))
-    // }
-    // if (incdec === -1) {
-    //   breathOutSound.playAsync(console.log("playing sound!"))
-    // }
   }
 
   render() {
@@ -74,6 +68,7 @@ export default class MainComponent extends React.Component {
           stopped={this.state.stopped}
           paused={this.state.paused}
           incdec={this.state.incdec}
+          duration={this.state.duration}
         />
 
         <BreathCircle
@@ -99,6 +94,7 @@ export default class MainComponent extends React.Component {
 
         <BreathSound
           incdec={this.state.incdec}
+          started={this.state.started}
           stopped={this.state.stopped}
           paused={this.state.paused}
         />

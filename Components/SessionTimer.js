@@ -32,7 +32,7 @@ export default class SessionTimer extends React.Component {
     if(nextProps.paused === true) {
       clearInterval(this.timer);
     }
-    if(nextProps.stopped === true) {
+    if(nextProps.stopped === true && nextProps.stopped != this.props.stopped) {
       this.setState((prevState) => ({ hours: 0, minutes: 0, seconds: 0,  }));
       clearInterval(this.timer);
       Alert.alert(`You meditated for ${this.state.hours}:${this.state.minutes}:${this.state.seconds} `)
