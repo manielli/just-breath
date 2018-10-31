@@ -68,7 +68,6 @@ export default class MainComponent extends React.Component {
           stopped={this.state.stopped}
           paused={this.state.paused}
           incdec={this.state.incdec}
-          duration={this.state.duration}
         />
 
         <BreathCircle

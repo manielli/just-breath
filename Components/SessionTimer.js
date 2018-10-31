@@ -45,11 +45,29 @@ export default class SessionTimer extends React.Component {
 
   render() {
     let time = Math.floor(this.state.now - this.state.start)
-    if(this.state.seconds >= 10 || this.state.minutes >= 10) {
+    if(this.state.seconds >= 10 && this.state.minutes < 10) {
+      return (
+        <View style={styles.sessionTimer}>
+          <Text style={styles.timerText}>
+            {this.state.hours + ":" + 0 + this.state.minutes + ":" + this.state.seconds}
+          </Text>
+        </View>
+      )
+    }
+    if(this.state.minutes >= 10 && this.state.second >= 10) {
       return (
         <View style={styles.sessionTimer}>
           <Text style={styles.timerText}>
             {this.state.hours + ":" + this.state.minutes + ":" + this.state.seconds}
+          </Text>
+        </View>
+      )
+    }
+    if(this.state.minutes >= 10 && this.state.second < 10) {
+      return (
+        <View style={styles.sessionTimer}>
+          <Text style={styles.timerText}>
+            {this.state.hours + ":" + this.state.minutes + ":" + 0 + this.state.seconds}
           </Text>
         </View>
       )
@@ -69,11 +87,13 @@ export default class SessionTimer extends React.Component {
 const styles = StyleSheet.create({
   sessionTimer: {
     position: 'absolute',
+    flexDirection: 'row',
     top: 0,
     right: 0,
     margin: 20,
   },
   timerText: {
-    fontSize: 40,
+    fontSize: 30,
+    width: 140,
   }
 });
