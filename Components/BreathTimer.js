@@ -42,14 +42,14 @@ export default class BreathTimer extends React.Component {
   };
 
   render() {
-    return (
-      <View style={styles.incdecTimer}>
-
-        <Text style={styles.timerText}>
-          00:0{this.state.time}
-        </Text>
-
-      </View>
+    return (null
+      // <View style={styles.incdecTimer}>
+      //
+      //   <Text style={styles.timerText}>
+      //     00:0{this.state.time}
+      //   </Text>
+      //
+      // </View>
     );
   };
 }

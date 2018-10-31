@@ -5,6 +5,7 @@ import BreathTimer from './BreathTimer';
 import SessionTimer from './SessionTimer';
 import DurationSetter from './DurationSetter';
 import BreathCircle from './BreathCircle';
+import BreathSound from './BreathSound';
 
 export default class MainComponent extends React.Component {
 
@@ -85,6 +86,13 @@ export default class MainComponent extends React.Component {
         <DurationSetter
           durationUpdater={this.durationUpdater}
           duration={this.state.duration}
+          started={this.state.started}
+          stopped={this.state.stopped}
+          paused={this.state.paused}
+        />
+
+        <BreathSound
+          incdec={this.state.incdec}
           started={this.state.started}
           stopped={this.state.stopped}
           paused={this.state.paused}

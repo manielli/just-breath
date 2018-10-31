@@ -1,14 +1,11 @@
 import React from 'react';
 import { Alert, Button, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import breatheSound from './BreatheSound';
 
 export default class StartStopPauseButton extends React.Component {
 
   _onStartPressButton = () => {
     this.props.actionFunction("start")
-    // breatheSound()
-    breatheSound.playAsync(console.log("playing sound!"))
     Alert.alert('Deep Breaths!')
   }
 
@@ -19,7 +16,6 @@ export default class StartStopPauseButton extends React.Component {
 
   _onStopPressButton = () => {
     this.props.actionFunction("stop")
-    breatheSound.stopAsync()
     // Alert.alert('Stopped!')
   }
   render() {
