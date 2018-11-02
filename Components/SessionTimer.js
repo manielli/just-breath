@@ -15,7 +15,8 @@ export default class SessionTimer extends React.Component {
     if(nextProps.started === true) {
       // this prevents default behaviour of componentWillReceiveProps
       if(nextProps.incdec != this.props.incdec) {
-        console.log("do nothing")
+        return null
+        // console.log("do nothing")
       }
       else {
         this.timer = setInterval( () => {
@@ -76,7 +77,7 @@ export default class SessionTimer extends React.Component {
       return (
         <View style={styles.sessionTimer}>
           <Text style={styles.timerText}>
-            { this.state.hours + ":" + 0 + this.state.minutes + ":" + 0 + this.state.seconds}
+            {this.state.hours + ":" + 0 + this.state.minutes + ":" + 0 + this.state.seconds}
           </Text>
         </View>
       )
@@ -87,13 +88,12 @@ export default class SessionTimer extends React.Component {
 const styles = StyleSheet.create({
   sessionTimer: {
     position: 'absolute',
-    flexDirection: 'row',
     top: 0,
     right: 0,
-    margin: 20,
+    margin: 10,
   },
   timerText: {
-    fontSize: 30,
-    width: 140,
+    fontSize: 20,
+    width: 100,
   }
 });

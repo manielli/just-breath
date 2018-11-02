@@ -47,7 +47,7 @@ export default class MainComponent extends React.Component {
   storeIncDec = (incdec) => {
     this.setState(
       { incdec: incdec },
-      ()=>console.log("inside storeIncDec", this.state.incdec)
+      // ()=>console.log("inside storeIncDec", this.state.incdec)
     )
   }
 
