@@ -29,13 +29,13 @@ export default class BreathSound extends React.Component {
   componentWillReceiveProps(nextProps) {
     if(nextProps.incdec === 1 && nextProps.started === true) {
       this.state.inSound.replayAsync().catch((error) => {
-        console.log("an error occurred playing inSound");
+        console.log("an error occurred playing inSound ====> app was ejected while playing sound");
       })
       // console.log("playing IN sound!");
     }
     if(nextProps.incdec === -1 && nextProps.started === true) {
       this.state.outSound.replayAsync().catch((error) => {
-        console.log("an error occurred playing outSound => app was ejected while playing sound");
+        console.log("an error occurred playing outSound ====> app was ejected while playing sound");
       })
       // console.log("playing OUT sound!");
     }
