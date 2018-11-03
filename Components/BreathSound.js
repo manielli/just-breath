@@ -16,14 +16,18 @@ export default class BreathSound extends React.Component {
       onPlaybackStatusUpdate = null,
       downloadFirst = false,
       // console.log("loading IN sound!"),
-    )
+    ).catch((error) => {
+      console.log("an error occurred loading the inSound")
+    })
     this.state.outSound.loadAsync(
       require("../Assets/breath_out_5sec.wav"),
       initialStatus = { shouldPlay: false, isLooping: false, },
       onPlaybackStatusUpdate = null,
       downloadFirst = false,
       // console.log("loading OUT sound!"),
-    )
+    ).catch((error) => {
+      console.log("an error occurred loading the outSound")
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,14 +44,26 @@ export default class BreathSound extends React.Component {
       // console.log("playing OUT sound!");
     }
     if(nextProps.stopped || nextProps.paused === true) {
-      this.state.inSound.stopAsync();
-      this.state.outSound.stopAsync();
+      this.state.inSound.stopAsync()
+        .catch((error) => {
+          console.log("an error occurred stopping the inSound")
+        });
+      this.state.outSound.stopAsync()
+        .catch((error) => {
+          console.log("an error occurred stopping the outSound")
+        });
     }
   }
 
   componentWillUnmount() {
-    this.state.inSound.stopAsync();
-    this.state.outSound.stopAsync();
+    this.state.inSound.stopAsync()
+      .catch((error) => {
+        console.log("an error occurred Unmouting the inSound")
+      });
+    this.state.outSound.stopAsync()
+      .catch((error) => {
+        console.log("an error occurred Unmounting the outSound")
+      });
   }
 
   render() {
