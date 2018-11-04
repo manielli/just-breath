@@ -13,7 +13,7 @@ export default class SessionTimer extends React.Component {
   componentWillReceiveProps(nextProps) {
 
     if(nextProps.started === true) {
-      // this prevents default behaviour of componentWillReceiveProps
+      // this 👇 prevents default behaviour of componentWillReceiveProps
       if(nextProps.incdec != this.props.incdec) {
         return null
         // console.log("do nothing")
@@ -33,10 +33,90 @@ export default class SessionTimer extends React.Component {
     if(nextProps.paused === true) {
       clearInterval(this.timer);
     }
+    // the non-equality operator below eliminates the behavior of triggering these Alerts to fire when moving the Breathe Rate slider
     if(nextProps.stopped === true && nextProps.stopped != this.props.stopped) {
+      // RESETS session timer and clears the timer interval
       this.setState((prevState) => ({ hours: 0, minutes: 0, seconds: 0,  }));
       clearInterval(this.timer);
-      Alert.alert(`You meditated for ${this.state.hours}:${this.state.minutes}:${this.state.seconds} `)
+      // IF statements to dispaly ALERTS to the user in proper grammar for how long they breathed
+      if(this.state.hours < 1) {
+        if(this.state.minutes < 1) {
+          if(this.state.seconds <= 1) {
+            Alert.alert(`You meditated for ${this.state.seconds} second!`)
+          }
+          else{
+            Alert.alert(`You meditated for ${this.state.seconds} seconds!`)
+          }
+        }
+        else if(this.state.minutes === 1){
+          if(this.state.seconds <= 1) {
+            Alert.alert(`You meditated for ${this.state.minutes} minute and ${this.state.seconds} second!`)
+          }
+          else{
+            Alert.alert(`You meditated for ${this.state.minutes} minute and ${this.state.seconds} seconds!`)
+          }
+        }
+        else{
+          if(this.state.seconds <= 1) {
+            Alert.alert(`You meditated for ${this.state.minutes} minutes and ${this.state.seconds} second!`)
+          }
+          else{
+            Alert.alert(`You meditated for ${this.state.minutes} minutes and ${this.state.seconds} seconds!`)
+          }
+        }
+      }
+      else if (this.state.hours === 1){
+        if(this.state.minutes < 1) {
+          if(this.state.seconds <= 1) {
+            Alert.alert(`You meditated for 1 hour and ${this.state.seconds} second!`)
+          }
+          else{
+            Alert.alert(`You meditated for 1 hour and ${this.state.seconds} seconds!`)
+          }
+        }
+        else if(this.state.minutes === 1){
+          if(this.state.seconds <= 1) {
+            Alert.alert(`You meditated for 1 hour, ${this.state.minutes} minute and ${this.state.seconds} second!`)
+          }
+          else{
+            Alert.alert(`You meditated for 1 hour, ${this.state.minutes} minute and ${this.state.seconds} seconds!`)
+          }
+        }
+        else{
+          if(this.state.seconds <= 1) {
+            Alert.alert(`You meditated for 1 hour, ${this.state.minutes} minutes and ${this.state.seconds} second!`)
+          }
+          else{
+            Alert.alert(`You meditated for 1 hour, ${this.state.minutes} minutes and ${this.state.seconds} seconds!`)
+          }
+        }
+      }
+      else{
+        if(this.state.minutes < 1) {
+          if(this.state.seconds <= 1) {
+            Alert.alert(`You meditated for ${this.state.hours} hours and ${this.state.seconds} second!`)
+          }
+          else{
+            Alert.alert(`You meditated for ${this.state.hours} hours and ${this.state.seconds} seconds!`)
+          }
+        }
+        else if(this.state.minutes === 1){
+          if(this.state.seconds <= 1) {
+            Alert.alert(`You meditated for ${this.state.hours} hours, ${this.state.minutes} minute and ${this.state.seconds} second!`)
+          }
+          else{
+            Alert.alert(`You meditated for ${this.state.hours} hours, ${this.state.minutes} minute and ${this.state.seconds} seconds!`)
+          }
+        }
+        else{
+          if(this.state.seconds <= 1) {
+            Alert.alert(`You meditated for ${this.state.hours} hours, ${this.state.minutes} minutes and ${this.state.seconds} second!`)
+          }
+          else{
+            Alert.alert(`You meditated for ${this.state.hours} hours, ${this.state.minutes} minutes and ${this.state.seconds} seconds!`)
+          }
+        }
+      } // END OF IF STATEMENTS FOR DISPLAYING BREATHE SESSION TIME
     }
   }
 
