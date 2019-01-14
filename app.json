@@ -1,9 +1,17 @@
 {
   "expo": {
+    "name": "Just Breathe",
     "sdkVersion": "27.0.0",
-    "name": "JustBreathe",
-    "slug": "justbreathe",
+    "icon": "",
+    "description": "An app to help calm your breathing",
     "version": "0.1.0",
-    "description": ""
+    "orientation": "portrait",
+     "slug": "justbreathe",
+     "ios": {
+       "bundleIdentifier": "com.matthewisraelson.justbreathe"
+     },
+     "android": {
+       "package": "com.matthewisraelson.justbreathe"
+     }
   }
 }

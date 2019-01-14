@@ -15,28 +15,55 @@ export default class BreathSound extends React.Component {
       initialStatus = { shouldPlay: false, isLooping: false, },
       onPlaybackStatusUpdate = null,
       downloadFirst = false,
-      console.log("loading IN sound!"),
-    )
+      // console.log("loading IN sound!"),
+    ).catch((error) => {
+      console.log("an error occurred loading the inSound")
+    })
     this.state.outSound.loadAsync(
       require("../Assets/breath_out_5sec.wav"),
       initialStatus = { shouldPlay: false, isLooping: false, },
       onPlaybackStatusUpdate = null,
       downloadFirst = false,
-      console.log("loading OUT sound!"),
-    )
+      // console.log("loading OUT sound!"),
+    ).catch((error) => {
+      console.log("an error occurred loading the outSound")
+    })
   }
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.incdec === 1 && nextProps.started === true) {
-      this.state.inSound.replayAsync(console.log("playing IN sound!"))
+      this.state.inSound.replayAsync().catch((error) => {
+        console.log("an error occurred playing inSound ====> app was ejected while playing sound");
+      })
+      // console.log("playing IN sound!");
     }
     if(nextProps.incdec === -1 && nextProps.started === true) {
-      this.state.outSound.replayAsync(console.log("playing OUT sound!"))
+      this.state.outSound.replayAsync().catch((error) => {
+        console.log("an error occurred playing outSound ====> app was ejected while playing sound");
+      })
+      // console.log("playing OUT sound!");
     }
     if(nextProps.stopped || nextProps.paused === true) {
-      this.state.inSound.stopAsync();
-      this.state.outSound.stopAsync();
+      this.state.inSound.stopAsync()
+        .catch((error) => {
+          console.log("an error occurred stopping the inSound")
+        });
+      this.state.outSound.stopAsync()
+        .catch((error) => {
+          console.log("an error occurred stopping the outSound")
+        });
     }
+  }
+
+  componentWillUnmount() {
+    this.state.inSound.stopAsync()
+      .catch((error) => {
+        console.log("an error occurred Unmouting the inSound")
+      });
+    this.state.outSound.stopAsync()
+      .catch((error) => {
+        console.log("an error occurred Unmounting the outSound")
+      });
   }
 
   render() {
