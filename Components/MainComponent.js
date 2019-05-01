@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import StartStopPauseButton from './StartStopPause';
 import BreathTimer from './BreathTimer';
 import SessionTimer from './SessionTimer';

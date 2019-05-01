@@ -6,7 +6,7 @@ export default class StartStopPauseButton extends React.Component {
 
   _onStartPressButton = () => {
     this.props.actionFunction("start")
-    Alert.alert('Deep Breaths!')
+    // Alert.alert('Deep Breaths!')
   }
 
   _onPausePressButton = () => {
@@ -43,11 +43,6 @@ export default class StartStopPauseButton extends React.Component {
               onPress={this._onStartPressButton}
               style={styles.touchable}
             >
-              {/* <Ionicons
-                name="ios-arrow-forward"
-                size={40}
-                color="white"
-              /> */}
               <Image
                 source={require("../Assets/play-button-white.png")}
               />
