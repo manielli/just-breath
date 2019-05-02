@@ -79,7 +79,6 @@ export default class BreathCircle extends React.Component {
     }
 
   // <=========== BREATHE OUT VIEWS =============>
-    // if (this.props.started === true && this.props.incDec === -1) {
     if (this.props.startstoppause === "started" && this.props.incDec === -1) {
       animation() // Calls start to the const animation defined before the return
       return (
