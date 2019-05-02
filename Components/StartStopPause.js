@@ -1,6 +1,5 @@
 import React from 'react';
 import { Alert, Button, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 
 export default class StartStopPauseButton extends React.Component {
 
@@ -19,7 +18,8 @@ export default class StartStopPauseButton extends React.Component {
     // Alert.alert('Stopped!')
   }
   render() {
-    if(this.props.started === true) {
+    // if(this.props.started === true) {
+    if(this.props.startstoppause === "started") {
       return (
         <View style={styles.buttonContainer}>
           <Button
@@ -35,7 +35,8 @@ export default class StartStopPauseButton extends React.Component {
       )
     }
     // https://stackoverflow.com/questions/45263904/how-to-define-image-as-a-background-button
-    else if(this.props.stopped === true || this.props.paused === true) {
+    // else if(this.props.stopped === true || this.props.paused === true) {
+    else if(this.props.startstoppause === "stopped" || "paused") {
       return (
         <View style={styles.buttonContainer}>
           <View style={styles.startbuttonContainer}>

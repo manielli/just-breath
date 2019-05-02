@@ -1,14 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
 export default class BreathTimer extends React.Component {
   state = {
-    time: this.props.duration,
+    time: this.props.duration, // initially (when component first mounts) time is set to duration
     incdec: -1, // <== this the increment/decrement variable we pass to tick() function and flip in flipped()
   };
 
   componentDidMount() {
-    this.timerID = setInterval( () => this.tick(), 1000 );
+    this.timerID = setInterval( () => this.tick(), 1000 ); // when component mounts, we set interval to fire tick function every 1 second
   }
 
   componentWillUnmount() {
@@ -22,19 +21,18 @@ export default class BreathTimer extends React.Component {
       );
       // pass the incdec state up to the MainComponent
       this.props.sendIncDec(this.state.incdec)
-      // console.log("inside flipped", this.state.incdec);
     }
+    // console.log("inside flipped", this.state.incdec);
   };
 
   tick() {
-    if(this.props.started === true) {
+    if(this.props.startstoppause === "started") {
       this.flipped()
       this.setState(
         { time: (this.state.time + this.state.incdec) }
       );
-      // console.log("inside tick", this.state.incdec)
     }
-    else if(this.props.stopped === true) {
+    else if(this.props.startstoppause === "stopped") {
       this.setState(
         { time: this.props.duration }
       );
@@ -42,26 +40,6 @@ export default class BreathTimer extends React.Component {
   };
 
   render() {
-    return (null
-      // <View style={styles.incdecTimer}>
-      //
-      //   <Text style={styles.timerText}>
-      //     00:0{this.state.time}
-      //   </Text>
-      //
-      // </View>
-    );
+    return null;
   };
 }
-
-const styles = StyleSheet.create({
-  incdecTimer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    margin: 20,
-  },
-  timerText: {
-    fontSize: 40,
-  },
-});
