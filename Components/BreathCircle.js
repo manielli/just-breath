@@ -2,11 +2,14 @@ import React from 'react';
 import { Animated, Text, View } from 'react-native';
 
 export default class BreathCircle extends React.Component {
-
+  state = {
+    incDec: this.props.incDec,
+    startstoppause: this.props.startstoppause
+  }
   render() {
     // ANIMATED FUNCTION STUFF
     let circleAnimation = new Animated.Value(0) // Sets variable to keyword, initial value 0
-    const animation = () => {
+    const animationStart = () => {
       Animated.timing(    // Animate over time
         circleAnimation,   // The animated value to drive; starts at 0
         {
@@ -14,7 +17,16 @@ export default class BreathCircle extends React.Component {
           duration: this.props.duration * 1000,   // Duration of Animation set to duration
         }
       ).start(); // START ANIMATION
-    };
+    }
+    const animationStop = () => {
+      Animated.timing(    // Animate over time
+        circleAnimation,   // The animated value to drive; starts at 0
+        {
+          toValue: 1,   // Animate to end value: 1
+          duration: this.props.duration * 1000,   // Duration of Animation set to duration
+        }
+      ).stop(); // START ANIMATION
+    }
     // BREATH ORB VARS
     let breathorbMaxWidth = 300 // ALL OTHER VALS DERIVED FROM THIS MAXWIDTH
     let breathorbMinWidth = 200 // ALL OTHER VALS DERIVED FROM THIS MINWIDTH
@@ -80,7 +92,8 @@ export default class BreathCircle extends React.Component {
 
   // <=========== BREATHE OUT VIEWS =============>
     if (this.props.startstoppause === "started" && this.props.incDec === -1) {
-      animation() // Calls start to the const animation defined before the return
+      console.log("inside BreatheOut", this.state.incDec, this.state.startstoppause)
+      animationStart() // Calls start to the const animation defined before the return
       return (
         <View>
           <Animated.View // INNER BREATH ORB
@@ -137,7 +150,7 @@ export default class BreathCircle extends React.Component {
               }}
             >
             </Animated.View>
-            <Animated.View // TOP OUTER TICK // DOES THIS NEED TO BE ANIMATED VIEW? ITS NOT ANIMATING??
+            <View // TOP OUTER TICK 
               style={{
                 position: 'absolute',
                 zIndex: 2,
@@ -153,8 +166,8 @@ export default class BreathCircle extends React.Component {
                 ],
               }}
             >
-            </Animated.View>
-            <Animated.View // BOTTOM OUTER TICK // DOES THIS NEED TO BE ANIMATED VIEW? ITS NOT ANIMATING??
+            </View>
+            <View // BOTTOM OUTER TICK // DOES THIS NEED TO BE ANIMATED VIEW? ITS NOT ANIMATING??
               style={{
                 position: 'absolute',
                 zIndex: 2,
@@ -170,7 +183,7 @@ export default class BreathCircle extends React.Component {
                 ],
               }}
             >
-            </Animated.View>
+            </View>
             <Animated.View  // OUTER CIRCLE BORDER
               style={{
                 position: 'absolute',
@@ -210,7 +223,7 @@ export default class BreathCircle extends React.Component {
     }
   // <========== BREATHE IN VIEWS ===========>
     else if (this.props.startstoppause === "started" && this.props.incDec === 1) {
-      animation()
+      animationStart()
       return (
         <View>
           <Animated.View   // INNER BREATH ORB
@@ -267,7 +280,7 @@ export default class BreathCircle extends React.Component {
               }}
             >
             </Animated.View>
-            <Animated.View // TOP OUTER TICK
+            <View // TOP OUTER TICK
               style={{
                 position: 'absolute',
                 zIndex: 2,
@@ -283,8 +296,8 @@ export default class BreathCircle extends React.Component {
                 ],
               }}
             >
-            </Animated.View>
-            <Animated.View // BOTTOM OUTER TICK
+            </View>
+            <View // BOTTOM OUTER TICK
               style={{
                 position: 'absolute',
                 zIndex: 2,
@@ -300,7 +313,7 @@ export default class BreathCircle extends React.Component {
                 ],
               }}
             >
-            </Animated.View>
+            </View>
             <Animated.View  // OUTER CIRCLE BORDER
               style={{
                 position: 'absolute',
@@ -339,6 +352,7 @@ export default class BreathCircle extends React.Component {
       );
     }
     else {
+      animationStop()
       // STATIC VIEW WHEN COMPONENT IS PAUSED OR STOPPED
       return (
         <View>

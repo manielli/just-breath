@@ -5,10 +5,10 @@ export default class SessionTimer extends React.Component {
   state = {
     hours: 0,
     minutes: 0,
-    seconds: 55,
+    seconds: 0,
     captures: null,
   }
-
+  // 👇 method depricated as of React 16.3, think about migrating to getDerivedStateFromProps() static method + componentDidUpdate()
   componentWillReceiveProps(nextProps) {
     if(nextProps.startstoppause === "started") {
       // this 👇 prevents default behaviour of componentWillReceiveProps
