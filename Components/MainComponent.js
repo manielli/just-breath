@@ -56,7 +56,6 @@ export default class MainComponent extends React.Component {
         />
         
         <SessionTimer
-          incdec={this.state.incdec}
           startstoppause={this.state.startstoppause}
         />
 
