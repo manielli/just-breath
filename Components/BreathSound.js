@@ -16,18 +16,16 @@ export default class BreathSound extends React.Component {
       initialStatus = { shouldPlay: false, isLooping: false, },
       onPlaybackStatusUpdate = null,
       downloadFirst = false,
-      // console.log("loading IN sound!"),
     ).catch((error) => {
-      // console.log("an error occurred loading the inSound")
+      console.log("an error occurred loading the inSound ===>", error)
     })
     this.state.outSound.loadAsync(
       require("../Assets/breathe_2nd_note.wav"),
       initialStatus = { shouldPlay: false, isLooping: false, },
       onPlaybackStatusUpdate = null,
       downloadFirst = false,
-      // console.log("loading OUT sound!"),
     ).catch((error) => {
-      // console.log("an error occurred loading the outSound")
+      console.log("an error occurred loading the outSound ===>", error)
     })
   }
 
@@ -35,37 +33,33 @@ export default class BreathSound extends React.Component {
     if(nextProps.incdec === 1 && nextProps.startstoppause === "started") {
       this.state.inSound.replayAsync()
       .catch((error) => {
-        console.log("an error occurred playing inSound ====> app was ejected while playing sound");
+        console.log("an error occurred playing inSound ====> app was ejected while playing sound ===>", error);
       })
-      // console.log("playing IN sound!");
     }
     if(nextProps.incdec === -1 && nextProps.startstoppause === "started") {
       this.state.outSound.replayAsync()
       .catch((error) => {
-        console.log("an error occurred playing outSound ====> app was ejected while playing sound");
+        console.log("an error occurred playing outSound ====> app was ejected while playing sound ===>", error);
       })
-      // console.log("playing OUT sound!");
     }
     if(nextProps.startstoppause === "paused") {
       this.state.inSound.pauseAsync()
       .catch((error) => {
-        console.log("an error occurred stopping the inSound")
+        console.log("an error occurred stopping the inSound ===>", error)
       });
-      // Want to figure out if I can pause the sound and store the positionMillis to start playback from
-      console.log(this.state.inSound.positionMillis)
       this.state.outSound.pauseAsync()
       .catch((error) => {
-        console.log("an error occurred stopping the outSound")
+        console.log("an error occurred stopping the outSound ===>", error)
       });
     }
     if(nextProps.startstoppause === "stopped") {
       this.state.inSound.stopAsync()
       .catch((error) => {
-        console.log("an error occurred stopping the inSound")
+        console.log("an error occurred stopping the inSound ===>", error)
       });
       this.state.outSound.stopAsync()
       .catch((error) => {
-        console.log("an error occurred stopping the outSound")
+        console.log("an error occurred stopping the outSound ===>", error)
       });
     }
   }
@@ -73,11 +67,11 @@ export default class BreathSound extends React.Component {
   componentWillUnmount() {
     this.state.inSound.stopAsync()
       .catch((error) => {
-        console.log("an error occurred Unmouting the inSound")
+        console.log("an error occurred Unmouting the inSound ===>", error)
       });
     this.state.outSound.stopAsync()
       .catch((error) => {
-        console.log("an error occurred Unmounting the outSound")
+        console.log("an error occurred Unmounting the outSound ===>", error)
       });
   }
 
