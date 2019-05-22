@@ -2,10 +2,6 @@ import React from 'react';
 import { Animated, Text, View } from 'react-native';
 
 export default class BreathCircle extends React.Component {
-  state = {
-    incDec: this.props.incDec,
-    startstoppause: this.props.startstoppause
-  }
   render() {
     // ANIMATED FUNCTION STUFF
     let circleAnimation = new Animated.Value(0) // Sets variable to keyword, initial value 0
@@ -92,7 +88,6 @@ export default class BreathCircle extends React.Component {
 
   // <=========== BREATHE OUT VIEWS =============>
     if (this.props.startstoppause === "started" && this.props.incDec === -1) {
-      console.log("inside BreatheOut", this.state.incDec, this.state.startstoppause)
       animationStart() // Calls start to the const animation defined before the return
       return (
         <View>

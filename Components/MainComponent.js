@@ -18,15 +18,16 @@ export default class MainComponent extends React.Component {
   actionHandler = (startstoppause) => {
     if(startstoppause === "start") {
       this.setState({
-        startstoppause: "started"
+        startstoppause: "started",
       })
     } else if(startstoppause === "stop") {
       this.setState({
         startstoppause: "stopped",
+        // incdec: -1,
       })
       } else if(startstoppause === "pause") {
         this.setState({
-          startstoppause: "paused"
+          startstoppause: "paused",
         })
     }
   };
@@ -51,6 +52,7 @@ export default class MainComponent extends React.Component {
           sendIncDec={this.storeIncDec}
           duration={this.state.duration - 1}
           startstoppause={this.state.startstoppause}
+          incdec={this.state.incdec}
         />
         
         <SessionTimer

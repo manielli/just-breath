@@ -26,6 +26,7 @@ export default class BreathTimer extends React.Component {
   };
 
   tick() {
+    console.log("i am ticking now, here is my time state", this.state.time)
     if(this.props.startstoppause === "started") {
       this.flipped()
       this.setState(
@@ -33,6 +34,8 @@ export default class BreathTimer extends React.Component {
       );
     }
     else if(this.props.startstoppause === "stopped") {
+      console.log("inside BreathTime stopped", this.state.time, this.state.incdec)
+      // clearInterval(this.timerID);
       this.setState(
         { time: this.props.duration }
       );
