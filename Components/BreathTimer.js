@@ -3,7 +3,7 @@ import React from 'react';
 export default class BreathTimer extends React.Component {
   state = {
     time: this.props.duration, // initially (when component first mounts) time is set to duration
-    incdec: -1, // <== this the increment/decrement variable we pass to tick() function and flip in flipped()
+    incdec: this.props.incdec, // <== this the increment/decrement variable we pass to tick() function and flip in flipped()
   };
 
   componentDidMount() {
@@ -14,7 +14,7 @@ export default class BreathTimer extends React.Component {
     clearInterval(this.timerID);
   }
 
-  flipped = () => {
+  flipped() {
     if(this.state.time < 1 || this.state.time > this.props.duration) {
       this.setState(
         { incdec: this.state.incdec * -1 }
@@ -27,18 +27,20 @@ export default class BreathTimer extends React.Component {
 
   tick() {
     console.log("i am ticking now, here is my time state", this.state.time)
-    if(this.props.startstoppause === "started") {
+    if (this.props.startstoppause === "started") {
       this.flipped()
       this.setState(
         { time: (this.state.time + this.state.incdec) }
       );
     }
-    else if(this.props.startstoppause === "stopped") {
+    else if (this.props.startstoppause === "stopped" || "paused") {
       console.log("inside BreathTime stopped", this.state.time, this.state.incdec)
       // clearInterval(this.timerID);
-      this.setState(
-        { time: this.props.duration }
-      );
+      this.setState({ 
+        time: this.props.duration,
+        incdec: this.props.incdec
+      });
+      this.props.sendIncDec(-1)
     }
   };
 

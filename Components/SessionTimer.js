@@ -8,15 +8,11 @@ export default class SessionTimer extends React.Component {
     seconds: 0,
     captures: null,
   }
-  // 👇 method depricated as of React 16.3, think about migrating to getDerivedStateFromProps() static method + componentDidUpdate()
+  // 👇 method depricated as of React 16.3, think about migrating to static getDerivedStateFromProps() method + componentDidUpdate()
   componentWillReceiveProps(nextProps) {
     if(nextProps.startstoppause === "started") {
       // this 👇 prevents default behaviour of componentWillReceiveProps
-      if(nextProps.incdec != this.props.incdec) {
-        return null
-        // console.log("do nothing")
-      }
-      else {
+      if(nextProps.startstoppause != this.props.startstoppause) {
         this.timer = setInterval( () => {
           if(this.state.seconds >= 59) {
             this.setState((prevState) => ({ minutes: prevState.minutes + 1, seconds: -1}));
@@ -28,6 +24,10 @@ export default class SessionTimer extends React.Component {
             this.setState((prevState) => ({ seconds: prevState.seconds + 1}))
           }
         }, 1000);
+      }
+      else {
+        return null
+        // console.log("do nothing")
       }
     }
     if(nextProps.startstoppause === "paused") {
