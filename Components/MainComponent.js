@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import StartStopPauseButton from './StartStopPause';
 import BreathTimer from './BreathTimer';
 import SessionTimer from './SessionTimer';
@@ -10,44 +10,37 @@ import BreathSound from './BreathSound';
 export default class MainComponent extends React.Component {
 
   state = {
-    duration: 5,
-    stopped: true,
-    started: false,
-    paused: false,
-    incdec: -1,
+    duration: 5, // default to 6 breaths / min
+    startstoppause: "stopped",
+    incdec: -1, // defualt to breath out 1st breath
   };
 
   actionHandler = (startstoppause) => {
-    // console.log("inside actionHandler in MainComponent", startstoppause)
     if(startstoppause === "start") {
-      this.setState(
-        { started: true, stopped: false, paused: false, },
-        // ()=>{console.log("inside actionHandler START in MainComponent", this.state)}
-      )
+      this.setState({
+        startstoppause: "started",
+      })
     } else if(startstoppause === "stop") {
-      this.setState(
-        { started: false, stopped: true, paused: false, },
-        // ()=>{console.log("inside actionHandler STOP in MainComponent", this.state)}
-      )
-    } else if(startstoppause === "pause") {
-      this.setState(
-        { started: false, stopped: false, paused: true, },
-        // ()=>{console.log("inside actionHandler PAUSE in MainComponent", this.state)}
-      )
+      this.setState({
+        startstoppause: "stopped",
+        // incdec: -1,
+      })
+      } else if(startstoppause === "pause") {
+        this.setState({
+          startstoppause: "paused",
+        })
     }
   };
 
   durationUpdater = (newduration) => {
     this.setState(
       { duration: newduration },
-      // ()=>console.log("inside durationUpdater", this.state.duration)
     )
   }
 
   storeIncDec = (incdec) => {
     this.setState(
       { incdec: incdec },
-      // ()=>console.log("inside storeIncDec", this.state.incdec)
     )
   }
 
@@ -56,46 +49,37 @@ export default class MainComponent extends React.Component {
       <View style={styles.container}>
 
         <BreathTimer
-          duration={this.state.duration - 1}
-          started={this.state.started}
-          stopped={this.state.stopped}
-          paused={this.state.paused}
           sendIncDec={this.storeIncDec}
-        />
-
-        <SessionTimer
-          started={this.state.started}
-          stopped={this.state.stopped}
-          paused={this.state.paused}
+          duration={this.state.duration - 1}
+          startstoppause={this.state.startstoppause}
           incdec={this.state.incdec}
+        />
+        
+        <SessionTimer
+          incdec={this.state.incdec}
+          startstoppause={this.state.startstoppause}
         />
 
         <BreathCircle
           duration={this.state.duration}
           incDec={this.state.incdec}
-          started={this.state.started}
+          startstoppause={this.state.startstoppause}
         />
 
         <StartStopPauseButton
           actionFunction={this.actionHandler}
-          started={this.state.started}
-          stopped={this.state.stopped}
-          paused={this.state.paused}
+          startstoppause={this.state.startstoppause}
         />
 
         <DurationSetter
           durationUpdater={this.durationUpdater}
           duration={this.state.duration}
-          started={this.state.started}
-          stopped={this.state.stopped}
-          paused={this.state.paused}
+          startstoppause={this.state.startstoppause}
         />
 
         <BreathSound
           incdec={this.state.incdec}
-          started={this.state.started}
-          stopped={this.state.stopped}
-          paused={this.state.paused}
+          startstoppause={this.state.startstoppause}
         />
 
       </View>

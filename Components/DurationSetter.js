@@ -9,8 +9,8 @@ export default class DurationSetter extends React.Component {
  }
 
   render() {
-    let rate = Math.floor(60/(this.props.duration *2))
-    if(this.props.started === true ) {
+    let rate = Math.floor(60/(this.props.duration * 2))
+    if(this.props.startstoppause === "started" ) {
       return null
     }
     else {

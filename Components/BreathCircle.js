@@ -2,11 +2,10 @@ import React from 'react';
 import { Animated, Text, View } from 'react-native';
 
 export default class BreathCircle extends React.Component {
-
   render() {
     // ANIMATED FUNCTION STUFF
-    let circleAnimation = new Animated.Value(0) // Sets variable to keyword
-    const animation = () => {
+    let circleAnimation = new Animated.Value(0) // Sets variable to keyword, initial value 0
+    const animationStart = () => {
       Animated.timing(    // Animate over time
         circleAnimation,   // The animated value to drive; starts at 0
         {
@@ -14,13 +13,22 @@ export default class BreathCircle extends React.Component {
           duration: this.props.duration * 1000,   // Duration of Animation set to duration
         }
       ).start(); // START ANIMATION
-    };
+    }
+    const animationStop = () => {
+      Animated.timing(    // Animate over time
+        circleAnimation,   // The animated value to drive; starts at 0
+        {
+          toValue: 1,   // Animate to end value: 1
+          duration: this.props.duration * 1000,   // Duration of Animation set to duration
+        }
+      ).stop(); // START ANIMATION
+    }
     // BREATH ORB VARS
     let breathorbMaxWidth = 300 // ALL OTHER VALS DERIVED FROM THIS MAXWIDTH
     let breathorbMinWidth = 200 // ALL OTHER VALS DERIVED FROM THIS MINWIDTH
     let breathOrbMaxColor = '#9ecdf9'
     let breathOrbMinColor = '#b3b8ff'
-    // CIRCLE BORDER VARS
+    // OUTER CIRCLE BORDER VARS
     let outercircleMaxWidth = breathorbMaxWidth + 20
     let outercircleMinWidth = breathorbMinWidth + 20
     let outercircleMaxRadius = outercircleMaxWidth / 2
@@ -29,7 +37,7 @@ export default class BreathCircle extends React.Component {
     // TRAVEL BALL VARS
     let travelBallWidHi = 10
     let travelBallColor = '#e785c8'
-    // TEXT SIZES
+    // INNER TEXT FONT SIZES
     let fontSizeMax = 26
     let fontSizeMin = 18
     // METHODS FOR ANIMATING THE TRAVELLING BALL ====>
@@ -43,24 +51,24 @@ export default class BreathCircle extends React.Component {
     let youtputRangeIn = []
 
     // set BREATHE OUT interpolatedRadius to values between outercircleMaxRadius and outercircleMinRadius
-    for (let j=outercircleMaxRadius; j>=outercircleMinRadius; --j) {
+    for (let j=outercircleMaxRadius; j >= outercircleMinRadius; --j) {
       interpolatedRadius.push(j);
     }
     // set BREATH IN interpolatedRadius2 to values between 110 and 160
-    for (let j=outercircleMinRadius; j<=outercircleMaxRadius; ++j) {
+    for (let j=outercircleMinRadius; j <= outercircleMaxRadius; ++j) {
       interpolatedRadius2.push(j);
     }
 
-    // calculate transformed X-values for Breath Out
-    for (let i=0; i<=snapshot; ++i) {
-      let value = i/snapshot; // ie 0/50 1/50, 2/50 => up to 1
+    // calculate transformed X-values for Breath OUT
+    for (let i=0; i <= snapshot; ++i) {
+      let value = i / snapshot; // ie 0/50 1/50, 2/50 => up to 1
       let move = Math.sin(value * Math.PI) * interpolatedRadius[i];
       inputRange.push(value);
       xoutputRange.push(move);
     }
-    // calculate transformed Y-values for Breath Out
+    // calculate transformed Y-values for Breath OUT
     for (let i=0; i<=snapshot; ++i) {
-      let value = i/snapshot;
+      let value = i / snapshot;
       let move = -Math.cos(value * Math.PI) * interpolatedRadius[i];
       youtputRange.push(move);
     }
@@ -78,12 +86,12 @@ export default class BreathCircle extends React.Component {
       youtputRangeIn.push(move);
     }
 
-    // BREATHE OUT VIEWS =============>
-    if (this.props.started === true && this.props.incDec === -1) {
-      animation() // Calls the const animation defined before the return
+  // <=========== BREATHE OUT VIEWS =============>
+    if (this.props.startstoppause === "started" && this.props.incDec === -1) {
+      animationStart() // Calls start to the const animation defined before the return
       return (
         <View>
-          <Animated.View    // BREATH ORB
+          <Animated.View // INNER BREATH ORB
             style={{
               flex: 0,
               flexDirection: 'column',
@@ -137,7 +145,7 @@ export default class BreathCircle extends React.Component {
               }}
             >
             </Animated.View>
-            <Animated.View // TOP OUTER TICK
+            <View // TOP OUTER TICK 
               style={{
                 position: 'absolute',
                 zIndex: 2,
@@ -153,8 +161,8 @@ export default class BreathCircle extends React.Component {
                 ],
               }}
             >
-            </Animated.View>
-            <Animated.View // BOTTOM OUTER TICK
+            </View>
+            <View // BOTTOM OUTER TICK // DOES THIS NEED TO BE ANIMATED VIEW? ITS NOT ANIMATING??
               style={{
                 position: 'absolute',
                 zIndex: 2,
@@ -170,8 +178,8 @@ export default class BreathCircle extends React.Component {
                 ],
               }}
             >
-            </Animated.View>
-            <Animated.View  // CIRCLE BORDER
+            </View>
+            <Animated.View  // OUTER CIRCLE BORDER
               style={{
                 position: 'absolute',
                 zIndex: 1,
@@ -208,12 +216,12 @@ export default class BreathCircle extends React.Component {
         </View>
       );
     }
-    // BREATHE IN VIEWS ===========>
-    else if (this.props.started === true && this.props.incDec === 1) {
-      animation() // Calls the const animation defined before the return
+  // <========== BREATHE IN VIEWS ===========>
+    else if (this.props.startstoppause === "started" && this.props.incDec === 1) {
+      animationStart()
       return (
         <View>
-          <Animated.View   // BREATH ORB
+          <Animated.View   // INNER BREATH ORB
             style={{
               flex: 0,
               flexDirection: 'column',
@@ -267,7 +275,7 @@ export default class BreathCircle extends React.Component {
               }}
             >
             </Animated.View>
-            <Animated.View // TOP OUTER TICK
+            <View // TOP OUTER TICK
               style={{
                 position: 'absolute',
                 zIndex: 2,
@@ -283,8 +291,8 @@ export default class BreathCircle extends React.Component {
                 ],
               }}
             >
-            </Animated.View>
-            <Animated.View // BOTTOM OUTER TICK
+            </View>
+            <View // BOTTOM OUTER TICK
               style={{
                 position: 'absolute',
                 zIndex: 2,
@@ -300,8 +308,8 @@ export default class BreathCircle extends React.Component {
                 ],
               }}
             >
-            </Animated.View>
-            <Animated.View  // CIRCLE BORDER
+            </View>
+            <Animated.View  // OUTER CIRCLE BORDER
               style={{
                 position: 'absolute',
                 zIndex: 1,
@@ -339,6 +347,7 @@ export default class BreathCircle extends React.Component {
       );
     }
     else {
+      animationStop()
       // STATIC VIEW WHEN COMPONENT IS PAUSED OR STOPPED
       return (
         <View>
@@ -348,7 +357,7 @@ export default class BreathCircle extends React.Component {
               width: breathorbMaxWidth,
               borderRadius: breathorbMaxWidth/2,
               backgroundColor: breathOrbMaxColor,
-              justifyContent: 'center', // centers text along y-axis
+              justifyContent: 'center', // centers along y-axis
             }}
           >
             <Text

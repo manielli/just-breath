@@ -1,25 +1,19 @@
 import React from 'react';
-import { Alert, Button, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Button, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 
 export default class StartStopPauseButton extends React.Component {
-
   _onStartPressButton = () => {
     this.props.actionFunction("start")
-    Alert.alert('Deep Breaths!')
-  }
-
+  };
   _onPausePressButton = () => {
     this.props.actionFunction("pause")
-    // Alert.alert('Paused Breath')
-  }
-
+  };
   _onStopPressButton = () => {
     this.props.actionFunction("stop")
-    // Alert.alert('Stopped!')
-  }
+  };
+
   render() {
-    if(this.props.started === true) {
+    if(this.props.startstoppause === "started") {
       return (
         <View style={styles.buttonContainer}>
           <Button
@@ -35,7 +29,7 @@ export default class StartStopPauseButton extends React.Component {
       )
     }
     // https://stackoverflow.com/questions/45263904/how-to-define-image-as-a-background-button
-    else if(this.props.stopped === true || this.props.paused === true) {
+    else if(this.props.startstoppause === "stopped" || "paused") {
       return (
         <View style={styles.buttonContainer}>
           <View style={styles.startbuttonContainer}>
@@ -43,21 +37,16 @@ export default class StartStopPauseButton extends React.Component {
               onPress={this._onStartPressButton}
               style={styles.touchable}
             >
-              {/* <Ionicons
-                name="ios-arrow-forward"
-                size={40}
-                color="white"
-              /> */}
               <Image
                 source={require("../Assets/play-button-white.png")}
               />
             </TouchableOpacity>
           </View>
         </View>
-      );
-    }
-  }
-}
+      )
+    };
+  };
+};
 
 const styles = StyleSheet.create({
   buttonContainer: {
