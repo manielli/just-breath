@@ -1,4 +1,4 @@
-![](JustBreathe.gif)
+![](just_breathe2.gif)
 
 # An App For Calming the Breath
 
