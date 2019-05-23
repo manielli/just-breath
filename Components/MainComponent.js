@@ -50,9 +50,8 @@ export default class MainComponent extends React.Component {
 
         <BreathTimer
           sendIncDec={this.storeIncDec}
-          duration={this.state.duration - 1}
+          duration={this.state.duration}
           startstoppause={this.state.startstoppause}
-          incdec={this.state.incdec}
         />
         
         <SessionTimer
