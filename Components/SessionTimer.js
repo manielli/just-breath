@@ -120,7 +120,7 @@ export default class SessionTimer extends React.Component {
             Alert.alert(`You focused on your breath for ${this.state.hours} hours, ${this.state.minutes} minutes and ${this.state.seconds} seconds!`)
           }
         }
-      } // END OF IF STATEMENTS FOR DISPLAYING TOTAL SESSION TIME
+      } // END OF IF STATEMENTS FOR DISPLAYING TOTAL SESSION TIME TO USER
     }
   }
 
