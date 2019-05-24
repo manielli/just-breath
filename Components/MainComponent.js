@@ -10,9 +10,9 @@ import BreathSound from './BreathSound';
 export default class MainComponent extends React.Component {
 
   state = {
-    duration: 5, // default to 6 breaths / min
+    duration: 5, // default 6 breaths per min
     startstoppause: "stopped",
-    incdec: -1, // defualt to breath out 1st breath
+    incdec: -1, // breathe out 1st breath
   };
 
   actionHandler = (startstoppause) => {
@@ -38,7 +38,7 @@ export default class MainComponent extends React.Component {
     )
   }
 
-  storeIncDec = (incdec) => {
+  updateIncDec = (incdec) => {
     this.setState(
       { incdec: incdec },
     )
@@ -48,20 +48,24 @@ export default class MainComponent extends React.Component {
     return (
       <View style={styles.container}>
 
-        <BreathTimer
-          sendIncDec={this.storeIncDec}
-          duration={this.state.duration - 1}
-          startstoppause={this.state.startstoppause}
+        <BreathSound
           incdec={this.state.incdec}
+          startstoppause={this.state.startstoppause}
         />
-        
+
         <SessionTimer
           startstoppause={this.state.startstoppause}
         />
 
+        <BreathTimer
+          duration={this.state.duration}
+          incdecUpdater={this.updateIncDec}
+          startstoppause={this.state.startstoppause}
+        />
+        
         <BreathCircle
           duration={this.state.duration}
-          incDec={this.state.incdec}
+          incdec={this.state.incdec}
           startstoppause={this.state.startstoppause}
         />
 
@@ -71,13 +75,8 @@ export default class MainComponent extends React.Component {
         />
 
         <DurationSetter
-          durationUpdater={this.durationUpdater}
           duration={this.state.duration}
-          startstoppause={this.state.startstoppause}
-        />
-
-        <BreathSound
-          incdec={this.state.incdec}
+          durationUpdater={this.durationUpdater}
           startstoppause={this.state.startstoppause}
         />
 
@@ -88,7 +87,7 @@ export default class MainComponent extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1,  // <== shorthand for flex-grow, flex-shrink, and flex-basis
     padding: 40,
     backgroundColor: '#febfe8',
     alignItems: 'center',

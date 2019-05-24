@@ -6,43 +6,37 @@ export default class SessionTimer extends React.Component {
     hours: 0,
     minutes: 0,
     seconds: 0,
-    captures: null,
   }
   // 👇 method depricated as of React 16.3, think about migrating to static getDerivedStateFromProps() method + componentDidUpdate()
   componentWillReceiveProps(nextProps) {
-    if(nextProps.startstoppause === "started") {
-      // this 👇 prevents default behaviour of componentWillReceiveProps
-      if(nextProps.startstoppause != this.props.startstoppause) {
-        this.timer = setInterval( () => {
-          if(this.state.seconds >= 59) {
-            this.setState((prevState) => ({ minutes: prevState.minutes + 1, seconds: -1}));
-          }
-          if(this.state.minutes >= 60) {
-            this.setState((prevState) => ({ hours: prevState.hours + 1, minutes: 0}));
-          }
-          else {
-            this.setState((prevState) => ({ seconds: prevState.seconds + 1}))
-          }
-        }, 1000);
-      }
-      else {
-        return null
-        // console.log("do nothing")
-      }
+
+    if(nextProps.startstoppause === "started" && nextProps.startstoppause != this.props.startstoppause) { // ==> checks if we are transitioning state of startstoppause
+      this.timer = setInterval( () => {
+        if(this.state.seconds >= 59) {
+          this.setState((prevState) => ({ minutes: prevState.minutes + 1, seconds: -1}));
+        }
+        if(this.state.minutes >= 60) {
+          this.setState((prevState) => ({ hours: prevState.hours + 1, minutes: 0, seconds: 0}));
+        }
+        else {
+          this.setState((prevState) => ({ seconds: prevState.seconds + 1}))
+        }
+      }, 1000);
     }
+
     if(nextProps.startstoppause === "paused") {
       clearInterval(this.timer);
     }
-    // the != below eliminates the behavior of triggering these Alerts to fire when moving the BreatheRate slider
-    if(nextProps.startstoppause === "stopped" && nextProps.startstoppause != this.props.startstoppause) { // checks if we are transitioning state of startstoppause
-      // RESETS SessionTimer
+
+    if(nextProps.startstoppause === "stopped" && nextProps.startstoppause != this.props.startstoppause) {
+      // ==> RESET SessionTimer
       this.setState({ 
         hours: 0, 
         minutes: 0, 
         seconds: 0,
       });
       clearInterval(this.timer);
-      // DISPLAY ALERTS to the user when they are done breathing
+      // ==> DISPLAY ALERTS TO USER
       if(this.state.hours < 1) {
         if(this.state.minutes < 1) {
           if(this.state.seconds <= 1) {
@@ -108,19 +102,19 @@ export default class SessionTimer extends React.Component {
           if(this.state.seconds <= 1) {
             Alert.alert(`You focused on your breath for ${this.state.hours} hours, ${this.state.minutes} minute and ${this.state.seconds} second!`)
           }
-          else{
+          else {
             Alert.alert(`You focused on your breath for ${this.state.hours} hours, ${this.state.minutes} minute and ${this.state.seconds} seconds!`)
           }
         }
-        else{
+        else {
           if(this.state.seconds <= 1) {
             Alert.alert(`You focused on your breath for ${this.state.hours} hours, ${this.state.minutes} minutes and ${this.state.seconds} second!`)
           }
-          else{
+          else {
             Alert.alert(`You focused on your breath for ${this.state.hours} hours, ${this.state.minutes} minutes and ${this.state.seconds} seconds!`)
           }
         }
-      } // END OF IF STATEMENTS FOR DISPLAYING TOTAL SESSION TIME
+      } // END OF IF STATEMENTS FOR DISPLAYING TOTAL SESSION TIME TO USER
     }
   }
 

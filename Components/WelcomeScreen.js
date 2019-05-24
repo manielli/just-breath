@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Button, View, Text } from 'react-native';
-import { createStackNavigator, } from 'react-navigation';
 
 export default class WelcomeScreen extends React.Component {
   static navigationOptions = {
@@ -10,7 +9,7 @@ export default class WelcomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>
-          WELCOME TO JUST BREATHE...   NOW TAKE A DEEP BREATH
+          WELCOME TO JUST BREATHE... NOW TAKE A DEEP BREATH
         </Text>
         <Button
           title="Push to start breathing"
@@ -24,12 +23,16 @@ export default class WelcomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 40,
-    backgroundColor: '#febfe8',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#febfe8',
   },
   text: {
+    textAlign: 'left',
+    lineHeight: 50,
+    paddingRight: '15%',
+    paddingLeft: '15%',
+    paddingBottom: '10%',
     fontSize: 40,
   }
 });
