@@ -3,29 +3,23 @@ import { Animated, Text, View } from 'react-native';
 
 export default class BreathCircle extends React.Component {
   render() {
-    // ANIMATED FUNCTION STUFF
+    // ==> ANIMATION FUNCTIONS
     let circleAnimation = new Animated.Value(0) // Sets variable to keyword, initial value 0
     const animationStart = () => {
       Animated.timing(    // Animate over time
-        circleAnimation,   // The animated value to drive; starts at 0
+        circleAnimation,   // The animated value to drive ==> starts at initial value
         {
           toValue: 1,   // Animate to end value: 1
-          duration: this.props.duration * 1000,   // Duration of Animation set to duration
+          duration: this.props.duration * 1000,   // Duration of Animation
         }
-      ).start(); // START ANIMATION
+      ).start();
     }
     const animationStop = () => {
-      Animated.timing(    // Animate over time
-        circleAnimation,   // The animated value to drive; starts at 0
-        {
-          toValue: 1,   // Animate to end value: 1
-          duration: this.props.duration * 1000,   // Duration of Animation set to duration
-        }
-      ).stop(); // START ANIMATION
+      Animated.timing(circleAnimation).stop();
     }
     // BREATH ORB VARS
-    let breathorbMaxWidth = 300 // ALL OTHER VALS DERIVED FROM THIS MAXWIDTH
-    let breathorbMinWidth = 200 // ALL OTHER VALS DERIVED FROM THIS MINWIDTH
+    let breathorbMaxWidth = 290 // ALL OTHER VALS DERIVED FROM THIS MAXWIDTH
+    let breathorbMinWidth = 190 // ALL OTHER VALS DERIVED FROM THIS MINWIDTH
     let breathOrbMaxColor = '#9ecdf9'
     let breathOrbMinColor = '#b3b8ff'
     // OUTER CIRCLE BORDER VARS
@@ -87,129 +81,117 @@ export default class BreathCircle extends React.Component {
     }
 
   // <=========== BREATHE OUT VIEWS =============>
-    if (this.props.startstoppause === "started" && this.props.incDec === -1) {
+    if (this.props.startstoppause === "started" && this.props.incdec === -1) {
       animationStart() // Calls start to the const animation defined before the return
       return (
         <View>
-          <Animated.View // INNER BREATH ORB
-            style={{
-              flex: 0,
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              zIndex: 0,
+          <Animated.View style={{  // ==> INNER BREATH ORB
+            flex: 0,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 0,
+            width: circleAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [breathorbMaxWidth, breathorbMinWidth],
+            }),
+            height: circleAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [breathorbMaxWidth, breathorbMinWidth],
+            }),
+            backgroundColor: circleAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [breathOrbMaxColor, breathOrbMinColor],
+            }),
+            borderRadius: circleAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [breathorbMaxWidth/2, breathorbMinWidth/2]
+            }),
+          }}>
+            <Animated.View style={{  // ==> TRAVEL BALL
+              position: 'relative',
+              zIndex: 3,
+              backgroundColor: travelBallColor,
+              width: travelBallWidHi,
+              height: travelBallWidHi,
+              borderRadius: travelBallWidHi/2,
+              top: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [travelBallWidHi/2, -travelBallWidHi/2]
+              }),
+              transform: [
+                {
+                  translateY: circleAnimation.interpolate({
+                    inputRange: inputRange,
+                    outputRange: youtputRange
+                  })
+                },
+                {
+                  translateX: circleAnimation.interpolate({
+                    inputRange: inputRange,
+                    outputRange: xoutputRange
+                  })
+                },
+              ],
+            }}>
+            </Animated.View>
+            <View style={{  // ==> TOP OUTER TICK 
+              position: 'absolute',
+              zIndex: 2,
+              top: -10,
+              backgroundColor: 'white',
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+              borderTopRightRadius: 0, // these make it not a circle
+              borderBottomRightRadius: 0, // these make it not a circle
+              transform: [
+                {rotate: '-90deg'},
+              ],
+            }}>
+            </View>
+            <View style={{  // ==> BOTTOM OUTER TICK
+              position: 'absolute',
+              zIndex: 2,
+              bottom: -10,
+              backgroundColor: 'white',
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+              borderTopRightRadius: 0, // these make it not a circle
+              borderBottomRightRadius: 0,
+              transform: [
+                {rotate: '90deg'}
+              ],
+            }}>
+            </View>
+            <Animated.View style={{  // ==> OUTER CIRCLE BORDER
+              position: 'absolute',
+              zIndex: 1,
               width: circleAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [breathorbMaxWidth, breathorbMinWidth],
+                outputRange: [outercircleMaxWidth, outercircleMinWidth],
               }),
               height: circleAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [breathorbMaxWidth, breathorbMinWidth],
-              }),
-              backgroundColor: circleAnimation.interpolate({
-                inputRange: [0, 1],
-                outputRange: [breathOrbMaxColor, breathOrbMinColor],
+                outputRange: [outercircleMaxWidth, outercircleMinWidth],
               }),
               borderRadius: circleAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [breathorbMaxWidth/2, breathorbMinWidth/2]
+                outputRange: [outercircleMaxWidth/2, outercircleMinWidth/2]
               }),
-            }}
-          >
-            <Animated.View // TRAVEL BALL
-              style={{
-                position: 'relative',
-                zIndex: 3,
-                backgroundColor: travelBallColor,
-                width: travelBallWidHi,
-                height: travelBallWidHi,
-                borderRadius: travelBallWidHi/2,
-                top: circleAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [travelBallWidHi/2, -travelBallWidHi/2]
-                }),
-                transform: [
-                  {
-                    translateY: circleAnimation.interpolate({
-                      inputRange: inputRange,
-                      outputRange: youtputRange
-                    })
-                  },
-                  {
-                    translateX: circleAnimation.interpolate({
-                      inputRange: inputRange,
-                      outputRange: xoutputRange
-                    })
-                  },
-                ],
-              }}
-            >
+              borderWidth: 5,
+              borderColor: circleBorderColor,
+            }}>
             </Animated.View>
-            <View // TOP OUTER TICK 
-              style={{
-                position: 'absolute',
-                zIndex: 2,
-                top: -10,
-                backgroundColor: 'white',
-                width: 10,
-                height: 10,
-                borderRadius: 5,
-                borderTopRightRadius: 0, // these make it not a circle
-                borderBottomRightRadius: 0, // these make it not a circle
-                transform: [
-                  {rotate: '-90deg'},
-                ],
-              }}
-            >
-            </View>
-            <View // BOTTOM OUTER TICK // DOES THIS NEED TO BE ANIMATED VIEW? ITS NOT ANIMATING??
-              style={{
-                position: 'absolute',
-                zIndex: 2,
-                bottom: -10,
-                backgroundColor: 'white',
-                width: 10,
-                height: 10,
-                borderRadius: 5,
-                borderTopRightRadius: 0, // these make it not a circle
-                borderBottomRightRadius: 0,
-                transform: [
-                  {rotate: '90deg'}
-                ],
-              }}
-            >
-            </View>
-            <Animated.View  // OUTER CIRCLE BORDER
-              style={{
-                position: 'absolute',
-                zIndex: 1,
-                width: circleAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [outercircleMaxWidth, outercircleMinWidth],
-                }),
-                height: circleAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [outercircleMaxWidth, outercircleMinWidth],
-                }),
-                borderRadius: circleAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [outercircleMaxWidth/2, outercircleMinWidth/2]
-                }),
-                borderWidth: 5,
-                borderColor: circleBorderColor,
-              }}
-            >
-            </Animated.View>
-            <Animated.Text // INNER TEXT
-              style={{
-                position: 'absolute',
-                zIndex: 2,
-                fontSize: circleAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [fontSizeMax, fontSizeMin],
-                }),
-              }}
-            >
+            <Animated.Text style={{  // ==> INNER TEXT
+              position: 'absolute',
+              zIndex: 2,
+              fontSize: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [fontSizeMax, fontSizeMin],
+              }),
+            }}>
               breathe out
             </Animated.Text>
           </Animated.View>
@@ -217,155 +199,136 @@ export default class BreathCircle extends React.Component {
       );
     }
   // <========== BREATHE IN VIEWS ===========>
-    else if (this.props.startstoppause === "started" && this.props.incDec === 1) {
+    else if (this.props.startstoppause === "started" && this.props.incdec === 1) {
       animationStart()
       return (
         <View>
-          <Animated.View   // INNER BREATH ORB
-            style={{
-              flex: 0,
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              zIndex: 0,
+          <Animated.View style={{  // ==> INNER BREATH ORB
+            flex: 0,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 0,
+            width: circleAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [breathorbMinWidth, breathorbMaxWidth],
+            }),
+            height: circleAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [breathorbMinWidth, breathorbMaxWidth],
+            }),
+            backgroundColor: circleAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [breathOrbMinColor, breathOrbMaxColor],
+            }),
+            borderRadius: circleAnimation.interpolate({
+              inputRange: [0, 1],
+              outputRange: [breathorbMinWidth/2, breathorbMaxWidth/2]
+            }),
+          }}>
+            <Animated.View style={{  // ==> TRAVEL BALL
+              position: 'relative',
+              zIndex: 3,
+              backgroundColor: travelBallColor,
+              width: travelBallWidHi,
+              height: travelBallWidHi,
+              borderRadius: travelBallWidHi/2,
+              top: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [-travelBallWidHi/2, travelBallWidHi/2]
+              }),
+              transform: [
+                {translateY: circleAnimation.interpolate({
+                  inputRange: inputRange,
+                  outputRange: youtputRangeIn
+                })},
+                {translateX: circleAnimation.interpolate({
+                  inputRange: inputRange,
+                  outputRange: xoutputRangeIn
+                })},
+              ],
+            }}>
+            </Animated.View>
+            <View style={{  // ==> TOP OUTER TICK
+              position: 'absolute',
+              zIndex: 2,
+              top: -10,
+              backgroundColor: 'white',
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
+              transform: [
+                {rotate: '-90deg'}
+              ],
+            }}>
+            </View>
+            <View style={{  // ==> BOTTOM OUTER TICK
+              position: 'absolute',
+              zIndex: 2,
+              bottom: -10,
+              backgroundColor: 'white',
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
+              transform: [
+                {rotate: '90deg'}
+              ],
+            }}>
+            </View>
+            <Animated.View style={{  // ==> OUTER CIRCLE BORDER
+              position: 'absolute',
+              zIndex: 1,
               width: circleAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [breathorbMinWidth, breathorbMaxWidth],
+                outputRange: [outercircleMinWidth, outercircleMaxWidth],
               }),
               height: circleAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [breathorbMinWidth, breathorbMaxWidth],
-              }),
-              backgroundColor: circleAnimation.interpolate({
-                inputRange: [0, 1],
-                outputRange: [breathOrbMinColor, breathOrbMaxColor],
+                outputRange: [outercircleMinWidth, outercircleMaxWidth],
               }),
               borderRadius: circleAnimation.interpolate({
                 inputRange: [0, 1],
-                outputRange: [breathorbMinWidth/2, breathorbMaxWidth/2]
+                outputRange: [outercircleMinWidth/2, outercircleMaxWidth/2]
               }),
-            }}
-          >
-            <Animated.View // TRAVEL BALL
-              style={{
-                position: 'relative',
-                zIndex: 3,
-                backgroundColor: travelBallColor,
-                width: travelBallWidHi,
-                height: travelBallWidHi,
-                borderRadius: travelBallWidHi/2,
-                top: circleAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [-travelBallWidHi/2, travelBallWidHi/2]
-                }),
-                transform: [
-                  {
-                    translateY: circleAnimation.interpolate({
-                      inputRange: inputRange,
-                      outputRange: youtputRangeIn
-                    })
-                  },
-                  {
-                    translateX: circleAnimation.interpolate({
-                      inputRange: inputRange,
-                      outputRange: xoutputRangeIn
-                    })
-                  },
-                ],
-              }}
-            >
+              borderWidth: 5,
+              borderColor: circleBorderColor,
+            }}>
             </Animated.View>
-            <View // TOP OUTER TICK
-              style={{
-                position: 'absolute',
-                zIndex: 2,
-                top: -10,
-                backgroundColor: 'white',
-                width: 10,
-                height: 10,
-                borderRadius: 5,
-                borderTopRightRadius: 0,
-                borderBottomRightRadius: 0,
-                transform: [
-                  {rotate: '-90deg'}
-                ],
-              }}
-            >
-            </View>
-            <View // BOTTOM OUTER TICK
-              style={{
-                position: 'absolute',
-                zIndex: 2,
-                bottom: -10,
-                backgroundColor: 'white',
-                width: 10,
-                height: 10,
-                borderRadius: 5,
-                borderTopRightRadius: 0,
-                borderBottomRightRadius: 0,
-                transform: [
-                  {rotate: '90deg'}
-                ],
-              }}
-            >
-            </View>
-            <Animated.View  // OUTER CIRCLE BORDER
-              style={{
-                position: 'absolute',
-                zIndex: 1,
-                width: circleAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [outercircleMinWidth, outercircleMaxWidth],
-                }),
-                height: circleAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [outercircleMinWidth, outercircleMaxWidth],
-                }),
-                borderRadius: circleAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [outercircleMinWidth/2, outercircleMaxWidth/2]
-                }),
-                borderWidth: 5,
-                borderColor: circleBorderColor,
-              }}
-            >
-            </Animated.View>
-            <Animated.Text // INNER TEXT
-              style={{
-                position: 'absolute',
-                zIndex: 2,
-                fontSize: circleAnimation.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [fontSizeMin, fontSizeMax],
-                }),
-              }}
-            >
+            <Animated.Text style={{  // ==> INNER TEXT
+              position: 'absolute',
+              zIndex: 2,
+              fontSize: circleAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [fontSizeMin, fontSizeMax],
+              }),
+            }}>
               breathe in
             </Animated.Text>
           </Animated.View>
         </View>
       );
     }
+    // <========== END OF BREATHE IN VIEWS ===========>
     else {
       animationStop()
       // STATIC VIEW WHEN COMPONENT IS PAUSED OR STOPPED
       return (
         <View>
-          <View
-            style={{
-              height: breathorbMaxWidth,
-              width: breathorbMaxWidth,
-              borderRadius: breathorbMaxWidth/2,
-              backgroundColor: breathOrbMaxColor,
-              justifyContent: 'center', // centers along y-axis
-            }}
-          >
-            <Text
-              style={{
-                fontSize: fontSizeMax,
-                textAlign: 'center', // centers text along x-axis
-              }}
-            >
+          <View style={{
+            height: breathorbMaxWidth,
+            width: breathorbMaxWidth,
+            borderRadius: breathorbMaxWidth/2,
+            backgroundColor: breathOrbMaxColor,
+            justifyContent: 'center', // centers along y-axis
+          }}>
+            <Text style={{
+              fontSize: fontSizeMax,
+              textAlign: 'center', // centers text along x-axis
+            }}>
               just breathe
             </Text>
           </View>

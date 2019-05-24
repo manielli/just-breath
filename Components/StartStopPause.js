@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 
 export default class StartStopPauseButton extends React.Component {
+  
   _onStartPressButton = () => {
     this.props.actionFunction("start")
   };
@@ -51,8 +52,7 @@ export default class StartStopPauseButton extends React.Component {
 const styles = StyleSheet.create({
   buttonContainer: {
     position: 'absolute',
-    bottom: 0,
-    margin: 20,
+    bottom: 20,
   },
   startbuttonContainer: {
     flex: 0,
