@@ -13,21 +13,38 @@ export default class BreathSound extends React.Component {
     longoutSound: new Expo.Audio.Sound(),
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // ==> SHORT sounds
-    this.state.shortinSound.loadAsync(
-      require("../Assets/short_in_breath.wav"),
-      initialStatus = { shouldPlay: false, isLooping: false, },
-      onPlaybackStatusUpdate = null,
-      downloadFirst = true,
-    ).catch((error) => {console.log("an error occurred loading the shortinSound ===>", error)})
+    try {
+      await this.state.shortinSound.loadAsync(
+        require("../Assets/short_in_breath.wav"),
+        initialStatus = { shouldPlay: false, isLooping: false, },
+        onPlaybackStatusUpdate = null,
+        downloadFirst = true,
+      );
+    } catch (error) {console.log("an error occurred loading the shortinSound ===>", error)}
+    try {
+      await this.state.shortoutSound.loadAsync(
+        require("../Assets/short_out_breath.wav"),
+        initialStatus = { shouldPlay: false, isLooping: false, },
+        onPlaybackStatusUpdate = null,
+        downloadFirst = true,
+      );
+    } catch (error) {console.log("an error occurred loading the shortoutSound ===>", error)}
+    
+    // this.state.shortinSound.loadAsync(
+    //   require("../Assets/short_in_breath.wav"),
+    //   initialStatus = { shouldPlay: false, isLooping: false, },
+    //   onPlaybackStatusUpdate = null,
+    //   downloadFirst = true,
+    // ).catch((error) => {console.log("an error occurred loading the shortinSound ===>", error)})
   
-    this.state.shortoutSound.loadAsync(
-      require("../Assets/short_out_breath.wav"),
-      initialStatus = { shouldPlay: false, isLooping: false, },
-      onPlaybackStatusUpdate = null,
-      downloadFirst = true,
-    ).catch((error) => {console.log("an error occurred loading the shortoutSound ===>", error)})
+    // this.state.shortoutSound.loadAsync(
+    //   require("../Assets/short_out_breath.wav"),
+    //   initialStatus = { shouldPlay: false, isLooping: false, },
+    //   onPlaybackStatusUpdate = null,
+    //   downloadFirst = true,
+    // ).catch((error) => {console.log("an error occurred loading the shortoutSound ===>", error)})
 
     // ==> MID sounds
     this.state.midinSound.loadAsync(
@@ -77,36 +94,42 @@ export default class BreathSound extends React.Component {
     
   }
 
-  componentWillReceiveProps(nextProps) {
+  async componentWillReceiveProps(nextProps) {
 
     if (nextProps.incdec === -1 && nextProps.startstoppause === "started") {
       if (this.props.duration === 3) {
-        this.state.shortoutSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing shortoutSound ===> app was ejected while playing sound ===>", error);})
+        try {
+          await this.state.shortoutSound.replayAsync()
+        } catch (error) {
+          console.log("an error occurred playing shortoutSound ===>", error)
+        }
       } else if (this.props.duration === 5) {
         this.state.midoutSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing midoutSound ===> app was ejected while playing sound ===>", error);})
+        .catch((error) => {console.log("an error occurred playing midoutSound ===>", error);})
       } else if (this.props.duration === 7) {
         this.state.sevenoutSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing sevenoutSound ===> app was ejected while playing sound ===>", error);})
+        .catch((error) => {console.log("an error occurred playing sevenoutSound ===>", error);})
       } else {
         this.state.longoutSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing longoutSound ===> app was ejected while playing sound ===>", error);})
+        .catch((error) => {console.log("an error occurred playing longoutSound ===>", error);})
       }
     }
     if (nextProps.incdec === 1 && nextProps.startstoppause === "started") {
       if (this.props.duration === 3) {
-        this.state.shortinSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing shortoutSound ===> app was ejected while playing sound ===>", error);})
+        try {
+          await this.state.shortinSound.replayAsync()
+        } catch (error) {
+          console.log("an error occurred playing shortinSound ===>", error)
+        }
       } else if (this.props.duration === 5) {
         this.state.midinSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing midoutSound ===> app was ejected while playing sound ===>", error);})
+        .catch((error) => {console.log("an error occurred playing midoutSound ===>", error);})
       } else if(this.props.duration === 7) {
         this.state.seveninSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing sevenoutSound ===> app was ejected while playing sound ===>", error);})
+        .catch((error) => {console.log("an error occurred playing sevenoutSound ===>", error);})
       } else {
         this.state.longinSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing longinSound ===> app was ejected while playing sound ===>", error);})
+        .catch((error) => {console.log("an error occurred playing longinSound ===>", error);})
       }
     }
 
