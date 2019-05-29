@@ -50,6 +50,7 @@ export default class MainComponent extends React.Component {
 
         <BreathSound
           incdec={this.state.incdec}
+          duration={this.state.duration}
           startstoppause={this.state.startstoppause}
         />
 
