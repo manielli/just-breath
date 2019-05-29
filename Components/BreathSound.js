@@ -51,14 +51,15 @@ export default class BreathSound extends React.Component {
       require("../Assets/5_in_breath.wav"),
       initialStatus = { shouldPlay: false, isLooping: false, },
       onPlaybackStatusUpdate = null,
-      downloadFirst = true,
-    ).catch((error) => {console.log("an error occurred loading the 5inSound ===>", error)})
+      downloadFirst = false,
+    ).then(console.log("midinSound loaded status", this.state.midinSound._loaded))
+    .catch((error) => {console.log("an error occurred loading the 5inSound ===>", error)})
   
     this.state.midoutSound.loadAsync(
       require("../Assets/5_out_breath.wav"),
       initialStatus = { shouldPlay: false, isLooping: false, },
       onPlaybackStatusUpdate = null,
-      downloadFirst = true,
+      downloadFirst = false,
     ).catch((error) => {console.log("an error occurred loading the 5outSound ===>", error)})
 
     // ==> 7 SECOND sounds
@@ -118,11 +119,13 @@ export default class BreathSound extends React.Component {
       if (this.props.duration === 3) {
         try {
           await this.state.shortinSound.replayAsync()
+          console.log("midinSound loaded status on PLAY", this.state.midinSound._loaded)
         } catch (error) {
           console.log("an error occurred playing shortinSound ===>", error)
         }
       } else if (this.props.duration === 5) {
         this.state.midinSound.replayAsync()
+        .then(console.log("midinSound loaded status on PLAY", this.state.midinSound._loaded))
         .catch((error) => {console.log("an error occurred playing midoutSound ===>", error);})
       } else if(this.props.duration === 7) {
         this.state.seveninSound.replayAsync()
