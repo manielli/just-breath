@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { AppState, StyleSheet, View } from 'react-native';
 import StartStopPauseButton from './StartStopPause';
 import BreathTimer from './BreathTimer';
 import SessionTimer from './SessionTimer';
@@ -13,7 +13,29 @@ export default class MainComponent extends React.Component {
     duration: 5, // default 6 breaths per min
     startstoppause: "stopped",
     incdec: -1, // breathe out 1st breath
+    appState: AppState.currentState,
   };
+
+  componentDidMount() {
+     // ADD AppState CHANGE LISTENER
+     AppState.addEventListener('change', this._handleAppStateChange);
+     console.log(this.state.appState);
+  }
+
+  componentWillUnmount() {
+    // REMOVE AppState EventListener  
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = (nextAppState) => {
+    if ( this.state.appState.match(/inactive|background/) && nextAppState === 'active' ) {
+      console.log('App has come to the foreground!');
+      this.setState({startstoppause: "started", appState: nextAppState});
+    } else {
+      console.log('App has moved to the background!');
+      this.setState({startstoppause: "paused", appState: nextAppState});
+    };
+  }
 
   actionHandler = (startstoppause) => {
     if(startstoppause === "start") {
