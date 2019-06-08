@@ -13,194 +13,264 @@ export default class BreathSound extends React.Component {
     longoutSound: new Expo.Audio.Sound(),
   }
 
-  async componentDidMount() {
-    // ==> SHORT sounds
-    try {
-      await this.state.shortinSound.loadAsync(
-        require("../Assets/short_in_breath.wav"),
-        initialStatus = { shouldPlay: false, isLooping: false, },
-        onPlaybackStatusUpdate = null,
-        downloadFirst = true,
-      );
-    } catch (error) {console.log("an error occurred loading the shortinSound ===>", error)}
-    try {
-      await this.state.shortoutSound.loadAsync(
-        require("../Assets/short_out_breath.wav"),
-        initialStatus = { shouldPlay: false, isLooping: false, },
-        onPlaybackStatusUpdate = null,
-        downloadFirst = true,
-      );
-    } catch (error) {console.log("an error occurred loading the shortoutSound ===>", error)}
-    
-    // this.state.shortinSound.loadAsync(
-    //   require("../Assets/short_in_breath.wav"),
-    //   initialStatus = { shouldPlay: false, isLooping: false, },
-    //   onPlaybackStatusUpdate = null,
-    //   downloadFirst = true,
-    // ).catch((error) => {console.log("an error occurred loading the shortinSound ===>", error)})
-  
-    // this.state.shortoutSound.loadAsync(
-    //   require("../Assets/short_out_breath.wav"),
-    //   initialStatus = { shouldPlay: false, isLooping: false, },
-    //   onPlaybackStatusUpdate = null,
-    //   downloadFirst = true,
-    // ).catch((error) => {console.log("an error occurred loading the shortoutSound ===>", error)})
-
-    // ==> MID sounds
-    this.state.midinSound.loadAsync(
-      require("../Assets/5_in_breath.wav"),
-      initialStatus = { shouldPlay: false, isLooping: false, },
+  componentDidMount() {
+    // ==> 3 sec sounds
+    this.state.shortinSound.loadAsync(
+      require("../Assets/short_in_breath.wav"),
+      initialStatus = {
+        shouldPlay: false,
+        isLooping: false,
+      },
       onPlaybackStatusUpdate = null,
-      downloadFirst = false,
-    ).then(console.log("midinSound loaded status", this.state.midinSound._loaded))
-    .catch((error) => {console.log("an error occurred loading the 5inSound ===>", error)})
-  
+      downloadFirst = true,
+    ).catch((error) => {
+      console.log("an error occurred loading the shortinSound ===>", error)
+    })
+
+    this.state.shortoutSound.loadAsync(
+      require("../Assets/short_out_breath.wav"),
+      initialStatus = {
+        shouldPlay: false,
+        isLooping: false,
+      },
+      onPlaybackStatusUpdate = null,
+      downloadFirst = true,
+    ).catch((error) => {
+      console.log("an error occurred loading the shortoutSound ===>", error)
+    })
+
+    // ==> 5 sec sounds
+    this.state.midinSound.loadAsync(
+        require("../Assets/5_in_breath.wav"),
+        initialStatus = {
+          shouldPlay: false,
+          isLooping: false,
+        },
+        onPlaybackStatusUpdate = null,
+        downloadFirst = true,
+      ).catch((error) => {
+        console.log("an error occurred loading the 5inSound ===>", error)
+      })
+
     this.state.midoutSound.loadAsync(
       require("../Assets/5_out_breath.wav"),
-      initialStatus = { shouldPlay: false, isLooping: false, },
+      initialStatus = {
+        shouldPlay: false,
+        isLooping: false,
+      },
       onPlaybackStatusUpdate = null,
-      downloadFirst = false,
-    ).catch((error) => {console.log("an error occurred loading the 5outSound ===>", error)})
+      downloadFirst = true,
+    ).catch((error) => {
+      console.log("an error occurred loading the 5outSound ===>", error)
+    })
 
     // ==> 7 SECOND sounds
     this.state.seveninSound.loadAsync(
       require("../Assets/7_in_breath.wav"),
-      initialStatus = { shouldPlay: false, isLooping: false, },
+      initialStatus = {
+        shouldPlay: false,
+        isLooping: false,
+      },
       onPlaybackStatusUpdate = null,
       downloadFirst = true,
-    ).catch((error) => {console.log("an error occurred loading the 5inSound ===>", error)})
-  
+    ).catch((error) => {
+      console.log("an error occurred loading the 5inSound ===>", error)
+    })
+
     this.state.sevenoutSound.loadAsync(
       require("../Assets/7_out_breath.wav"),
-      initialStatus = { shouldPlay: false, isLooping: false, },
+      initialStatus = {
+        shouldPlay: false,
+        isLooping: false,
+      },
       onPlaybackStatusUpdate = null,
       downloadFirst = true,
-    ).catch((error) => {console.log("an error occurred loading the 5outSound ===>", error)})
-    
-    // ===> LONG sounds
+    ).catch((error) => {
+      console.log("an error occurred loading the 5outSound ===>", error)
+    })
+
+    // ===> 9 sec sounds
     this.state.longinSound.loadAsync(
       require("../Assets/breathe_1st_note.wav"),
-      initialStatus = { shouldPlay: false, isLooping: false, },
+      initialStatus = {
+        shouldPlay: false,
+        isLooping: false,
+      },
       onPlaybackStatusUpdate = null,
       downloadFirst = true,
-    ).catch((error) => {console.log("an error occurred loading the longinSound ===>", error)})
-    
+    ).catch((error) => {
+      console.log("an error occurred loading the longinSound ===>", error)
+    })
+
     this.state.longoutSound.loadAsync(
       require("../Assets/breathe_2nd_note.wav"),
-      initialStatus = { shouldPlay: false, isLooping: false, },
+      initialStatus = {
+        shouldPlay: false,
+        isLooping: false,
+      },
       onPlaybackStatusUpdate = null,
       downloadFirst = true,
-    ).catch((error) => {console.log("an error occurred loading the longoutSound ===>", error)})
- 
-    
+    ).catch((error) => {
+      console.log("an error occurred loading the longoutSound ===>", error)
+    })
   }
 
-  async componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
 
     if (nextProps.incdec === -1 && nextProps.startstoppause === "started") {
-      if (this.props.duration === 3) {
-        try {
-          await this.state.shortoutSound.replayAsync()
-        } catch (error) {
-          console.log("an error occurred playing shortoutSound ===>", error)
-        }
-      } else if (this.props.duration === 5) {
+      if (this.props.duration === 3 && this.state.shortoutSound._loaded) {
+        this.state.shortoutSound.replayAsync()
+        .catch((error) => { console.log("an error occurred playing midoutSound ===>", error);})
+      } else if (!this.state.shortoutSound._loaded) {
+        console.log("NOT LOADED set state to loading")
+      }
+      if (this.props.duration === 5 && this.state.midoutSound._loaded) {
         this.state.midoutSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing midoutSound ===>", error);})
-      } else if (this.props.duration === 7) {
+          .catch((error) => {console.log("an error occurred playing midoutSound ===>", error);})
+      } else if (!this.state.midoutSound._loaded) {
+        console.log("5 second OUT SOUND NOT LOADED set state to loading")
+      }
+      if (this.props.duration === 7 && this.state.sevenoutSound._loaded) {
         this.state.sevenoutSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing sevenoutSound ===>", error);})
-      } else {
+          .catch((error) => {
+            console.log("an error occurred playing sevenoutSound ===>", error);
+          })
+      } else if (!this.state.sevenoutSound._loaded) {
+        console.log("seven second OUT SOUND NOT LOADED set state to loading")
+      }
+      if (this.props.duration === 9 && this.state.longoutSound._loaded) {
         this.state.longoutSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing longoutSound ===>", error);})
+          .catch((error) => {console.log("an error occurred playing longoutSound ===>", error);})
+      } else if (!this.state.longoutSound._loaded) {
+        console.log("9 second OUT SOUND NOT LOADED set state to loading")
       }
     }
     if (nextProps.incdec === 1 && nextProps.startstoppause === "started") {
-      if (this.props.duration === 3) {
-        try {
-          await this.state.shortinSound.replayAsync()
-          console.log("midinSound loaded status on PLAY", this.state.midinSound._loaded)
-        } catch (error) {
-          console.log("an error occurred playing shortinSound ===>", error)
-        }
-      } else if (this.props.duration === 5) {
+      if (this.props.duration === 3 && this.state.shortinSound._loaded) {
+        this.state.shortinSound.replayAsync()
+          .catch((error) => {console.log("an error occurred playing midoutSound ===>", error);})
+      }  else if (!this.state.shortinSound._loaded) {
+        console.log("short in sound NOT LOADED set state to loading")
+      }
+      if (this.props.duration === 5 && this.state.midinSound._loaded) {
         this.state.midinSound.replayAsync()
-        .then(console.log("midinSound loaded status on PLAY", this.state.midinSound._loaded))
-        .catch((error) => {console.log("an error occurred playing midoutSound ===>", error);})
-      } else if(this.props.duration === 7) {
+          .catch((error) => {console.log("an error occurred playing midoutSound ===>", error);})
+      } else if (!this.state.midinSound._loaded) {
+        console.log("5 second IN SOUND NOT LOADED set state to loading")
+      }
+      if (this.props.duration === 7 && this.state.seveninSound._loaded) {
         this.state.seveninSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing sevenoutSound ===>", error);})
-      } else {
+          .catch((error) => {
+            console.log("an error occurred playing seveninSound ===>", error);
+          })
+      } else if (!this.state.seveninSound._loaded) {
+        console.log("seven second OUT SOUND NOT LOADED set state to loading")
+      } 
+     if (this.props.duration === 9 && this.state.longinSound._loaded) {
         this.state.longinSound.replayAsync()
-        .catch((error) => {console.log("an error occurred playing longinSound ===>", error);})
+          .catch((error) => {console.log("an error occurred playing longinSound ===>", error);})
+      } else if (!this.state.longinSound._loaded) {
+        console.log("9 second IN SOUND NOT LOADED set state to loading")
       }
     }
 
     if (nextProps.startstoppause === "paused") {
       this.state.shortinSound.stopAsync()
-      .catch((error) => {console.log("an error occurred pausing the shortinSound ===>", error)});
+        .catch((error) => {
+          console.log("an error occurred pausing the shortinSound ===>", error)
+        });
       this.state.shortoutSound.stopAsync()
-      .catch((error) => {console.log("an error occurred pausing the shortoutSound ===>", error)});
-      
+        .catch((error) => {
+          console.log("an error occurred pausing the shortoutSound ===>", error)
+        });
+
       this.state.midinSound.stopAsync()
-      .catch((error) => {console.log("an error occurred pausing the midinSound ===>", error)});
+        .catch((error) => {
+          console.log("an error occurred pausing the midinSound ===>", error)
+        });
       this.state.midoutSound.stopAsync()
-      .catch((error) => {console.log("an error occurred pausing the midoutSound ===>", error)});
-      
+        .catch((error) => {
+          console.log("an error occurred pausing the midoutSound ===>", error)
+        });
+
       this.state.seveninSound.stopAsync()
-      .catch((error) => {console.log("an error occurred pausing the seveninSound ===>", error)});
+        .catch((error) => {
+          console.log("an error occurred pausing the seveninSound ===>", error)
+        });
       this.state.sevenoutSound.stopAsync()
-      .catch((error) => {console.log("an error occurred pausing the sevenoutSound ===>", error)});
-      
+        .catch((error) => {
+          console.log("an error occurred pausing the sevenoutSound ===>", error)
+        });
+
       this.state.longinSound.stopAsync()
-      .catch((error) => {console.log("an error occurred pausing the longinSound ===>", error)});
+        .catch((error) => {
+          console.log("an error occurred pausing the longinSound ===>", error)
+        });
       this.state.longoutSound.stopAsync()
-      .catch((error) => {console.log("an error occurred pausing the longoutSound ===>", error)});
+        .catch((error) => {
+          console.log("an error occurred pausing the longoutSound ===>", error)
+        });
     }
 
     if (nextProps.startstoppause === "stopped") {
       this.state.shortinSound.stopAsync()
-      .catch((error) => {console.log("an error occurred stopping the shortinSound ===>", error)});
+        .catch((error) => {
+          console.log("an error occurred stopping the shortinSound ===>", error)
+        });
       this.state.shortoutSound.stopAsync()
-      .catch((error) => {console.log("an error occurred stopping the shortoutSound ===>", error)});
-      
+        .catch((error) => {
+          console.log("an error occurred stopping the shortoutSound ===>", error)
+        });
+
       this.state.midinSound.stopAsync()
-      .catch((error) => {console.log("an error occurred stopping the midinSound ===>", error)});
+        .catch((error) => {
+          console.log("an error occurred stopping the midinSound ===>", error)
+        });
       this.state.midoutSound.stopAsync()
-      .catch((error) => {console.log("an error occurred stopping the midoutSound ===>", error)});
-      
+        .catch((error) => {
+          console.log("an error occurred stopping the midoutSound ===>", error)
+        });
+
       this.state.seveninSound.stopAsync()
-      .catch((error) => {console.log("an error occurred stopping the seveninSound ===>", error)});
+        .catch((error) => {
+          console.log("an error occurred stopping the seveninSound ===>", error)
+        });
       this.state.sevenoutSound.stopAsync()
-      .catch((error) => {console.log("an error occurred stopping the sevenoutSound ===>", error)});
-      
+        .catch((error) => {
+          console.log("an error occurred stopping the sevenoutSound ===>", error)
+        });
+
       this.state.longinSound.stopAsync()
-      .catch((error) => {console.log("an error occurred stopping the longinSound ===>", error)});
+        .catch((error) => {
+          console.log("an error occurred stopping the longinSound ===>", error)
+        });
       this.state.longoutSound.stopAsync()
-      .catch((error) => {console.log("an error occurred stopping the longoutSound ===>", error)});
+        .catch((error) => {
+          console.log("an error occurred stopping the longoutSound ===>", error)
+        });
     }
   }
 
   componentWillUnmount() {
     this.state.shortinSound.stopAsync()
-    .catch((error) => {console.log("an error occurred Unmouting the shortinSound ===>", error)});
+      .catch((error) => {console.log("an error occurred Unmouting the shortinSound ===>", error)});
     this.state.shortoutSound.stopAsync()
-    .catch((error) => {console.log("an error occurred Unmounting the shortoutSound ===>", error)});
-    
+      .catch((error) => {console.log("an error occurred Unmounting the shortoutSound ===>", error)});
+
     this.state.midinSound.stopAsync()
-    .catch((error) => {console.log("an error occurred Unmouting the midinSound ===>", error)});
+      .catch((error) => {console.log("an error occurred Unmouting the midinSound ===>", error)});
     this.state.midoutSound.stopAsync()
-    .catch((error) => {console.log("an error occurred Unmounting the midoutSound ===>", error)});
-    
+      .catch((error) => {console.log("an error occurred Unmounting the midoutSound ===>", error)});
+
     this.state.seveninSound.stopAsync()
-    .catch((error) => {console.log("an error occurred Unmouting the seveninSound ===>", error)});
+      .catch((error) => {console.log("an error occurred Unmouting the seveninSound ===>", error)});
     this.state.sevenoutSound.stopAsync()
-    .catch((error) => {console.log("an error occurred Unmounting the sevenoutSound ===>", error)});
-    
+      .catch((error) => {console.log("an error occurred Unmounting the sevenoutSound ===>", error)});
+
     this.state.longinSound.stopAsync()
-    .catch((error) => {console.log("an error occurred Unmouting the longinSound ===>", error)});
+      .catch((error) => {console.log("an error occurred Unmouting the longinSound ===>", error)});
     this.state.longoutSound.stopAsync()
-    .catch((error) => {console.log("an error occurred Unmounting the longoutSound ===>", error)});
+      .catch((error) => {console.log("an error occurred Unmounting the longoutSound ===>", error)});
   }
 
   render() {
