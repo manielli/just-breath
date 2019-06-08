@@ -17,7 +17,7 @@ export default class MainComponent extends React.Component {
   };
 
   componentDidMount() {
-     // ADD AppState CHANGE LISTENER
+     // ADD AppState EventListener
      AppState.addEventListener('change', this._handleAppStateChange);
      console.log(this.state.appState);
   }
@@ -30,7 +30,7 @@ export default class MainComponent extends React.Component {
   _handleAppStateChange = (nextAppState) => {
     if ( this.state.appState.match(/inactive|background/) && nextAppState === 'active' ) {
       console.log('App has come to the foreground!');
-      this.setState({startstoppause: "started", appState: nextAppState});
+      this.setState({appState: nextAppState});
     } else {
       console.log('App has moved to the background!');
       this.setState({startstoppause: "paused", appState: nextAppState});
