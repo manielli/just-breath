@@ -329,7 +329,7 @@ export default class BreathCircle extends React.Component {
               fontSize: fontSizeMax,
               textAlign: 'center', // centers text along x-axis
             }}>
-              just breathe
+              just breathing
             </Text>
           </View>
         </View>
